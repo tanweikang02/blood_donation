@@ -1,5 +1,7 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:medilab_prokit/firebase_options.dart';
 import 'package:medilab_prokit/screens/MLSplashScreen.dart';
 import 'package:medilab_prokit/store/AppStore.dart';
 import 'package:medilab_prokit/utils/AppTheme.dart';
@@ -8,9 +10,10 @@ import 'package:nb_utils/nb_utils.dart';
 
 AppStore appStore = AppStore();
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await initialize(aLocaleLanguageList: languageList());
 
   appStore.toggleDarkMode(value: getBoolAsync('isDarkModeOnPref'));
@@ -32,7 +35,9 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: '${'MediLab'}${!isMobile ? ' ${platformName()}' : ''}',
         home: MLSplashScreen(),
-        theme: !appStore.isDarkModeOn ? AppThemeData.lightTheme : AppThemeData.darkTheme,
+        theme: !appStore.isDarkModeOn
+            ? AppThemeData.lightTheme
+            : AppThemeData.darkTheme,
         navigatorKey: navigatorKey,
         scrollBehavior: SBehavior(),
         supportedLocales: LanguageDataModel.languageLocales(),
