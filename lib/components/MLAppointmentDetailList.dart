@@ -71,14 +71,14 @@ class MLAppointmentDetailListState extends State<MLAppointmentDetailList> {
             8.height,
             Text(
               topHospitalList[0].city.validate(),
-              style: primaryTextStyle(color: mlColorDarkBlue),
+              style: primaryTextStyle(color: mlPrimaryColor),
             ).paddingLeft(18.0),
             16.height,
             mOption('Service'),
             4.height,
             Text(
               'Endocrinology -' + topHospitalList[0].fees.validate(),
-              style: primaryTextStyle(color: mlColorDarkBlue),
+              style: primaryTextStyle(color: mlPrimaryColor),
             ).paddingLeft(18.0),
             16.height,
             Row(
@@ -94,7 +94,7 @@ class MLAppointmentDetailListState extends State<MLAppointmentDetailList> {
                   children: [
                     Text('Doctor', style: secondaryTextStyle(color: appStore.isDarkModeOn ? white : blackColor)),
                     8.height,
-                    Text('Dr. Stephen Chew', style: primaryTextStyle(color: mlColorDarkBlue)),
+                    Text('Dr. Stephen Chew', style: primaryTextStyle(color: mlPrimaryColor)),
                   ],
                 ),
               ],
@@ -113,7 +113,7 @@ class MLAppointmentDetailListState extends State<MLAppointmentDetailList> {
                   children: [
                     Text('Patient', style: secondaryTextStyle(color: appStore.isDarkModeOn ? white : blackColor)),
                     8.height,
-                    Text('Kaixa Pham', style: primaryTextStyle(color: mlColorDarkBlue)),
+                    Text('Kaixa Pham', style: primaryTextStyle(color: mlPrimaryColor)),
                   ],
                 ),
               ],
@@ -121,11 +121,11 @@ class MLAppointmentDetailListState extends State<MLAppointmentDetailList> {
             16.height,
             mOption('Service'),
             4.height,
-            Text('Thu, Mar 18 -08:00 AM', style: primaryTextStyle(color: mlColorDarkBlue)).paddingLeft(18.0),
+            Text('Thu, Mar 18 -08:00 AM', style: primaryTextStyle(color: mlPrimaryColor)).paddingLeft(18.0),
             16.height,
             mOption('Payment Method'),
             4.height,
-            Text('Payment at the clinic', style: primaryTextStyle(color: mlColorDarkBlue)).paddingLeft(18.0),
+            Text('Payment at the clinic', style: primaryTextStyle(color: mlPrimaryColor)).paddingLeft(18.0),
           ],
         ),
       ).paddingAll(16.0),

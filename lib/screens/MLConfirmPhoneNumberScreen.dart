@@ -80,7 +80,7 @@ class _MLConfirmPhoneNumberScreenState extends State<MLConfirmPhoneNumberScreen>
                   24.height,
                   AppButton(
                     width: double.infinity,
-                    color: mlColorDarkBlue,
+                    color: mlPrimaryColor,
                     onTap: () => MLUpdateProfileScreen().launch(context),
                     child: Text(mlSend!, style: boldTextStyle(color: white)),
                   ),

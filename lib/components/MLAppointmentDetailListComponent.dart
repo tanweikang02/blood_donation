@@ -65,7 +65,7 @@ class MLAppointmentDetailListComponentState extends State<MLAppointmentDetailLis
                                 height: 75,
                                 width: 75,
                                 decoration: boxDecorationWithRoundedCorners(
-                                  backgroundColor: mlColorDarkBlue,
+                                  backgroundColor: mlPrimaryColor,
                                   borderRadius: radius(12),
                                 ),
                                 child: Column(
@@ -113,11 +113,11 @@ class MLAppointmentDetailListComponentState extends State<MLAppointmentDetailLis
                           8.height,
                           Row(
                             children: [
-                              Text(time!, style: boldTextStyle(color: mlColorDarkBlue)),
+                              Text(time!, style: boldTextStyle(color: mlPrimaryColor)),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  Text(mlAppointment_detail!, style: secondaryTextStyle(color: mlColorDarkBlue)),
+                                  Text(mlAppointment_detail!, style: secondaryTextStyle(color: mlPrimaryColor)),
                                   4.width,
                                   Icon(Icons.arrow_forward, color: mlPrimaryColor, size: 16),
                                 ],
@@ -136,7 +136,7 @@ class MLAppointmentDetailListComponentState extends State<MLAppointmentDetailLis
                       left: 16.0,
                       child: Container(
                         padding: EdgeInsets.all(2.0),
-                        decoration: boxDecorationWithRoundedCorners(backgroundColor: mlColorDarkBlue, borderRadius: radius(20)),
+                        decoration: boxDecorationWithRoundedCorners(backgroundColor: mlPrimaryColor, borderRadius: radius(20)),
                         child: Text(
                           (e.service.validate()),
                           style: secondaryTextStyle(color: white),

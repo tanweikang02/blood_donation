@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
-Color mlPrimaryColor = Colors.blue.shade700;
+Color mlPrimaryColor = Color.fromRGBO(240,70,83,1);
 Color mlColorBlue = Colors.blue;
-Color mlColorDarkBlue = Colors.blue.shade700;
 Color mlColorRed = Colors.red;
 Color mlColorCyan = Colors.cyan.shade300;
 Color mlColorLightGrey = Colors.grey.shade300;

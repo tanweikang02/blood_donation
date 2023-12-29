@@ -74,7 +74,7 @@ class MLShoppingCartComponentState extends State<MLShoppingCartComponent> {
                               Container(
                                 padding: EdgeInsets.only(right: 8.0, left: 8.0, top: 2.0, bottom: 2.0),
                                 decoration: boxDecorationWithRoundedCorners(
-                                  backgroundColor: mlColorDarkBlue,
+                                  backgroundColor: mlPrimaryColor,
                                 ),
                                 child: Text('01', style: secondaryTextStyle(color: white)),
                               ),

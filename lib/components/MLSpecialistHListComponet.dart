@@ -59,7 +59,7 @@ class MLSpecialistHorizontalListState extends State<MLSpecialistHorizontalList> 
                 child: Image.asset(listSpecialist[index].image.validate(), fit: BoxFit.fill, width: 48, height: 48),
               ),
               8.height,
-              Text(listSpecialist[index].title.validate(), style: boldTextStyle(size: 14, color: mlColorDarkBlue)),
+              Text(listSpecialist[index].title.validate(), style: boldTextStyle(size: 14, color: mlPrimaryColor)),
               4.height,
               Text(listSpecialist[index].subtitle.validate(), style: secondaryTextStyle()),
               4.height,

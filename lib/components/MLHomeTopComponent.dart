@@ -35,7 +35,7 @@ class _MLHomeTopComponentState extends State<MLHomeTopComponent> {
       width: context.width(),
       margin: EdgeInsets.only(bottom: 16.0),
       decoration: boxDecorationWithRoundedCorners(
-        backgroundColor: mlColorDarkBlue,
+        backgroundColor: mlPrimaryColor,
         borderRadius: BorderRadius.vertical(bottom: Radius.elliptical(MediaQuery.of(context).size.width, 80.0)),
       ),
       child: Column(

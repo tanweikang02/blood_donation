@@ -77,7 +77,7 @@ class MLConfirmOrderScreenState extends State<MLConfirmOrderScreen> {
               ],
             ),
             AppButton(
-              color: mlColorDarkBlue,
+              color: mlPrimaryColor,
               width: context.width(),
               onTap: () {
                 finish(context);

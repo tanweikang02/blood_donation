@@ -54,7 +54,7 @@ class MLDiseaseHorizontalListState extends State<MLDiseaseHorizontalList> {
                 height: 100,
               ).cornerRadiusWithClipRRect(12.0),
               8.height,
-              Text(listDisease[index].title.validate(), style: boldTextStyle(size: 14, color: mlColorDarkBlue)),
+              Text(listDisease[index].title.validate(), style: boldTextStyle(size: 14, color: mlPrimaryColor)),
               4.height,
               Text(listDisease[index].subtitle.validate(), style: secondaryTextStyle(size: 16)),
               4.height,

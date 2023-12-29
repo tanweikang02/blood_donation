@@ -40,7 +40,7 @@ class MLProfileFragmentState extends State<MLProfileFragment> {
               expandedHeight: 225,
               flexibleSpace: FlexibleSpaceBar(
                 background: Container(
-                  color: mlColorDarkBlue,
+                  color: mlPrimaryColor,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

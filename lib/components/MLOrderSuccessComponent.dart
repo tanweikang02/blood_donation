@@ -56,7 +56,7 @@ class MLOrderSuccessComponentState extends State<MLOrderSuccessComponent> {
               borderRadius: radius(12),
               border: Border.all(color: mlColorBlue),
             ),
-            child: Text("Track Order  >", style: boldTextStyle(color: mlColorDarkBlue)),
+            child: Text("Track Order  >", style: boldTextStyle(color: mlPrimaryColor)),
           ).onTap(() {
             MLOrderDetailScreen().launch(context);
           }),
@@ -66,7 +66,7 @@ class MLOrderSuccessComponentState extends State<MLOrderSuccessComponent> {
             children: [
               Text('Delivery by', style: secondaryTextStyle()),
               4.width,
-              Text('Medilab', style: secondaryTextStyle(color: mlColorDarkBlue)),
+              Text('Medilab', style: secondaryTextStyle(color: mlPrimaryColor)),
             ],
           ),
           16.height,

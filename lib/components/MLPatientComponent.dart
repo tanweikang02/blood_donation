@@ -108,9 +108,9 @@ class MLPatientComponentState extends State<MLPatientComponent> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Add New Dependent', style: primaryTextStyle(color: mlColorDarkBlue)),
+                Text('Add New Dependent', style: primaryTextStyle(color: mlPrimaryColor)),
                 8.width,
-                Icon(Icons.add_circle_outline, color: mlColorDarkBlue, size: 16),
+                Icon(Icons.add_circle_outline, color: mlPrimaryColor, size: 16),
               ],
             ).paddingAll(16.0).onTap(
               () {

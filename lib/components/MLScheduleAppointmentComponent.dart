@@ -123,11 +123,11 @@ class MLScheduleApoointmentSheetState extends State<MLScheduleApoointmentSheet> 
                             width: context.width() * 0.45,
                             padding: EdgeInsets.only(right: 8.0, left: 8.0, top: 8.0, bottom: 8.0),
                             decoration: boxDecorationWithRoundedCorners(
-                              backgroundColor: selectedTime == e ? mlColorDarkBlue : Colors.blue.shade50,
+                              backgroundColor: selectedTime == e ? mlPrimaryColor : Colors.blue.shade50,
                             ),
                             child: Text(
                               e.validate(),
-                              style: boldTextStyle(size: 14, color: selectedTime == e ? white : mlColorDarkBlue),
+                              style: boldTextStyle(size: 14, color: selectedTime == e ? white : mlPrimaryColor),
                               textAlign: TextAlign.center,
                             ),
                           ),

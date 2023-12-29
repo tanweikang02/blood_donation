@@ -102,7 +102,7 @@ class MLBookAppointmentScreenState extends State<MLBookAppointmentScreen> {
                             Text(
                               'Step $titleNumber of 5: ',
                               textAlign: TextAlign.center,
-                              style: boldTextStyle(color: mlColorDarkBlue),
+                              style: boldTextStyle(color: mlPrimaryColor),
                             ),
                             Text(titleText, textAlign: TextAlign.center, style: boldTextStyle(color: Colors.grey)),
                           ],
@@ -114,7 +114,7 @@ class MLBookAppointmentScreenState extends State<MLBookAppointmentScreen> {
                     LinearProgressIndicator(
                       minHeight: 2.0,
                       backgroundColor: mlColorLightGrey,
-                      valueColor: AlwaysStoppedAnimation<Color>(mlColorDarkBlue),
+                      valueColor: AlwaysStoppedAnimation<Color>(mlPrimaryColor),
                       value: progress,
                     ),
                     8.height,
@@ -125,7 +125,7 @@ class MLBookAppointmentScreenState extends State<MLBookAppointmentScreen> {
               AppButton(
                 height: 50,
                 width: context.width(),
-                color: mlColorDarkBlue,
+                color: mlPrimaryColor,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

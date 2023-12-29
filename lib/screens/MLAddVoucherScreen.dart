@@ -124,7 +124,7 @@ class MLAddVoucherScreenState extends State<MLAddVoucherScreen> {
             ),
             AppButton(
               width: context.width(),
-              color: mlColorDarkBlue,
+              color: mlPrimaryColor,
               child: Text("Add Voucher", style: boldTextStyle(color: white)),
               onTap: () {
                 MLAddPaymentScreen().launch(context);

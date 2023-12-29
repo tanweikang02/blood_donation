@@ -133,9 +133,9 @@ class MLDoctorListComponentState extends State<MLDoctorListComponent> {
                             RichText(
                               text: TextSpan(
                                 children: [
-                                  TextSpan(text: 'Doctor\'s Profile ', style: primaryTextStyle(color: mlColorDarkBlue)),
+                                  TextSpan(text: 'Doctor\'s Profile ', style: primaryTextStyle(color: mlPrimaryColor)),
                                   WidgetSpan(
-                                    child: Icon(Icons.arrow_forward, color: mlColorDarkBlue, size: 16).paddingLeft(4),
+                                    child: Icon(Icons.arrow_forward, color: mlPrimaryColor, size: 16).paddingLeft(4),
                                   ),
                                 ],
                               ),
@@ -166,7 +166,7 @@ class MLDoctorListComponentState extends State<MLDoctorListComponent> {
           color: context.cardColor,
           child: Text(
             'Schedule appointment time',
-            style: boldTextStyle(color: mlColorDarkBlue, decoration: TextDecoration.underline),
+            style: boldTextStyle(color: mlPrimaryColor, decoration: TextDecoration.underline),
           ),
         ).paddingOnly(right: 16, bottom: 72).onTap(
           () {

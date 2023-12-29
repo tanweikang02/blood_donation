@@ -59,7 +59,7 @@ class MLAddDependentScreenState extends State<MLAddDependentScreen> {
             ),
             AppButton(
               width: context.width(),
-              color: mlColorDarkBlue,
+              color: mlPrimaryColor,
               child: Text("Save", style: boldTextStyle(color: white)),
               onTap: () {
                 finish(context);

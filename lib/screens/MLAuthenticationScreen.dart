@@ -66,7 +66,7 @@ class _MLAuthenticationScreenState extends State<MLAuthenticationScreen> with Si
                   8.height,
                   createRichText(list: [
                     TextSpan(text: mlAuthentication_msg!, style: secondaryTextStyle()),
-                    TextSpan(text: phoneNumber!, style: boldTextStyle(color: mlColorDarkBlue)),
+                    TextSpan(text: phoneNumber!, style: boldTextStyle(color: mlPrimaryColor)),
                   ]),
                   16.height,
                   otpField(),
@@ -77,7 +77,7 @@ class _MLAuthenticationScreenState extends State<MLAuthenticationScreen> with Si
                       8.width,
                       Text(
                         'Re-send',
-                        style: boldTextStyle(color: mlColorDarkBlue, decoration: TextDecoration.underline),
+                        style: boldTextStyle(color: mlPrimaryColor, decoration: TextDecoration.underline),
                       ),
                       Text('01:58', textAlign: TextAlign.right).expand()
                     ],
@@ -87,7 +87,7 @@ class _MLAuthenticationScreenState extends State<MLAuthenticationScreen> with Si
                     height: buttonHeight,
                     child: AppButton(
                       width: double.infinity,
-                      color: mlColorDarkBlue,
+                      color: mlPrimaryColor,
                       onTap: () {
                         setState(() {
                           buttonOpacity = 0.0;
@@ -131,7 +131,7 @@ class _MLAuthenticationScreenState extends State<MLAuthenticationScreen> with Si
                       32.height,
                       AppButton(
                         width: double.infinity,
-                        color: mlColorDarkBlue,
+                        color: mlPrimaryColor,
                         onTap: () {
                           finish(context);
                           finish(context);

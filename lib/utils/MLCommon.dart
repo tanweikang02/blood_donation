@@ -37,7 +37,7 @@ Widget mlSelectedNavigationbarIcon(IconData iconData) {
   return Container(
     padding: EdgeInsets.all(10.0),
     decoration: boxDecorationWithRoundedCorners(backgroundColor: Colors.blue.withOpacity(0.1), borderRadius: radius(24)),
-    child: Icon(iconData, size: 22, color: mlColorDarkBlue),
+    child: Icon(iconData, size: 22, color: mlPrimaryColor),
   );
 }
 

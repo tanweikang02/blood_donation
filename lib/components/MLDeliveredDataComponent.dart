@@ -130,13 +130,13 @@ class MLDeliveredDataComponentState extends State<MLDeliveredDataComponent> {
                           Row(
                             children: [
                               Text('Total: ', style: boldTextStyle()),
-                              Text('\$300.00', style: boldTextStyle(color: mlColorDarkBlue)),
+                              Text('\$300.00', style: boldTextStyle(color: mlPrimaryColor)),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  Text(' Detail', style: boldTextStyle(size: 14, color: mlColorDarkBlue)),
+                                  Text(' Detail', style: boldTextStyle(size: 14, color: mlPrimaryColor)),
                                   4.width,
-                                  Icon(Icons.arrow_forward, color: mlColorDarkBlue, size: 16),
+                                  Icon(Icons.arrow_forward, color: mlPrimaryColor, size: 16),
                                 ],
                               ).expand(),
                             ],

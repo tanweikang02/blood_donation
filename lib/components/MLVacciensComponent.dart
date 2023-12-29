@@ -105,7 +105,7 @@ class MLVaccineComponentState extends State<MLVaccineComponent> {
                     percent: 0.8,
                     center: Text('1.3%', style: boldTextStyle(color: Colors.greenAccent, size: 20)),
                     backgroundColor: Colors.greenAccent,
-                    progressColor: mlColorDarkBlue,
+                    progressColor: mlPrimaryColor,
                   ),
                 ),
                 Column(

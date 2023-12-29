@@ -27,7 +27,7 @@ class MLConfirmAppointmentComponent extends StatelessWidget {
         ),
         Text(
           'Add Voucher',
-          style: boldTextStyle(color: mlColorDarkBlue, decoration: TextDecoration.underline),
+          style: boldTextStyle(color: mlPrimaryColor, decoration: TextDecoration.underline),
         ).paddingOnly(bottom: 70, right: 16).onTap(
           () {
             MLAddVoucherScreen().launch(context);

@@ -67,7 +67,7 @@ class MLPharmacyProductComponentState extends State<MLPharmacyProductComponent> 
                         fit: BoxFit.cover,
                       ).cornerRadiusWithClipRRectOnly(topRight: 8, topLeft: 8),
                       Container(
-                        decoration: boxDecorationWithRoundedCorners(backgroundColor: mlColorDarkBlue),
+                        decoration: boxDecorationWithRoundedCorners(backgroundColor: mlPrimaryColor),
                         child: Text('-30%', style: secondaryTextStyle(color: white)).paddingOnly(right: 8, left: 8.0),
                       ).paddingOnly(left: 4.0, bottom: 8)
                     ],

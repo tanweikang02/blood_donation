@@ -26,7 +26,7 @@ class MLBookedDialog extends StatelessWidget {
             AppButton(
               height: 50,
               width: context.width(),
-              color: mlColorDarkBlue,
+              color: mlPrimaryColor,
               child: Text("Add to Calender", style: primaryTextStyle(color: whiteColor)),
               onTap: () {
                 finish(context);
@@ -43,7 +43,7 @@ class MLBookedDialog extends StatelessWidget {
                 border: Border.all(color: mlColorBlue),
                 backgroundColor: appStore.isDarkModeOn ? black : white,
               ),
-              child: Text("Close", style: primaryTextStyle(color: mlColorDarkBlue)),
+              child: Text("Close", style: primaryTextStyle(color: mlPrimaryColor)),
             ).onTap(
               () {
                 finish(context);

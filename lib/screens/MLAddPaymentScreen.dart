@@ -66,9 +66,9 @@ class MLAddPaymentScreenState extends State<MLAddPaymentScreen> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text('Add New card', style: primaryTextStyle(color: mlColorDarkBlue)),
+                              Text('Add New card', style: primaryTextStyle(color: mlPrimaryColor)),
                               8.width,
-                              Icon(Icons.add_circle_outline, color: mlColorDarkBlue, size: 16),
+                              Icon(Icons.add_circle_outline, color: mlPrimaryColor, size: 16),
                             ],
                           ),
                         ),
@@ -92,7 +92,7 @@ class MLAddPaymentScreenState extends State<MLAddPaymentScreen> {
                   8.height,
                   AppButton(
                     width: context.width(),
-                    color: mlColorDarkBlue,
+                    color: mlPrimaryColor,
                     child: Text("Save", style: boldTextStyle(color: white)),
                     onTap: () {
                       _showDialog(context);

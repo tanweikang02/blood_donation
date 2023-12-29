@@ -75,7 +75,7 @@ class MLAddToCartScreenState extends State<MLAddToCartScreen> {
                                   Container(
                                     padding: EdgeInsets.all(8.0),
                                     decoration: boxDecorationWithRoundedCorners(
-                                      backgroundColor: mlColorDarkBlue,
+                                      backgroundColor: mlPrimaryColor,
                                       boxShape: BoxShape.circle,
                                     ),
                                     child: Text('3', style: secondaryTextStyle(size: 18, color: white)),
@@ -146,7 +146,7 @@ class MLAddToCartScreenState extends State<MLAddToCartScreen> {
                           ),
                           32.width,
                           AppButton(
-                            color: mlColorDarkBlue,
+                            color: mlPrimaryColor,
                             onTap: () {
                               setState(
                                 () {
@@ -166,7 +166,7 @@ class MLAddToCartScreenState extends State<MLAddToCartScreen> {
                         ],
                       )
                     : AppButton(
-                        color: mlColorDarkBlue,
+                        color: mlPrimaryColor,
                         width: context.width() / 2,
                         onTap: () {
                           setState(

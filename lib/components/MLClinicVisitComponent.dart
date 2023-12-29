@@ -89,7 +89,7 @@ class MLClinicVisitComponentState extends State<MLClinicVisitComponent> {
                             8.height,
                             Text(
                               (departmentList[index].price).validate(),
-                              style: boldTextStyle(color: mlColorDarkBlue),
+                              style: boldTextStyle(color: mlPrimaryColor),
                             ),
                           ],
                         ),

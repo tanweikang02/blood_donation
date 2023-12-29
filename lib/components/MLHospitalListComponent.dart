@@ -120,7 +120,7 @@ class MLHospitalListComponentState extends State<MLHospitalListComponent> {
                           child: Container(
                             padding: EdgeInsets.all(2.0),
                             decoration: boxDecorationWithRoundedCorners(
-                              backgroundColor: mlColorDarkBlue,
+                              backgroundColor: mlPrimaryColor,
                               borderRadius: radius(12),
                             ),
                             child: Text(
@@ -154,7 +154,7 @@ class MLHospitalListComponentState extends State<MLHospitalListComponent> {
                             children: [
                               TextSpan(text: 'Detail', style: primaryTextStyle(color: Colors.grey.shade500)),
                               WidgetSpan(
-                                child: Icon(Icons.arrow_forward, color: mlColorDarkBlue, size: 16).paddingLeft(4),
+                                child: Icon(Icons.arrow_forward, color: mlPrimaryColor, size: 16).paddingLeft(4),
                               ),
                             ],
                           ),
