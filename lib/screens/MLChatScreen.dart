@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:medilab_prokit/model/MLInboxData.dart';
 import 'package:medilab_prokit/utils/MLColors.dart';
@@ -50,21 +49,26 @@ class MLChatScreenState extends State<MLChatScreen> {
                     CircleAvatar(
                       backgroundColor: mlColorLightGrey,
                       radius: 24,
-                      child: Image.asset(ml_ic_doctor_image!, fit: BoxFit.cover).cornerRadiusWithClipRRect(30.0),
+                      child: Image.asset(ml_ic_doctor_image!, fit: BoxFit.cover)
+                          .cornerRadiusWithClipRRect(30.0),
                     ),
                     Positioned(
                       right: 0,
                       bottom: 6,
-                      child: Icon(Icons.brightness_1_rounded, color: Colors.greenAccent, size: 14),
+                      child: Icon(Icons.brightness_1_rounded,
+                          color: Colors.greenAccent, size: 14),
                     )
                   ]),
                   8.width,
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Dr. Miranda Kerr', style: boldTextStyle(color: whiteColor, size: 18)),
+                      Text('Dr. Miranda Kerr',
+                          style: boldTextStyle(color: whiteColor, size: 18)),
                       4.height,
-                      Text('Online', style: secondaryTextStyle(size: 16, color: white.withOpacity(0.5))),
+                      Text('Online',
+                          style: secondaryTextStyle(
+                              size: 16, color: white.withOpacity(0.5))),
                     ],
                   )
                 ],
@@ -106,7 +110,7 @@ class MLChatScreenState extends State<MLChatScreen> {
                                     ),
                                     padding: EdgeInsets.all(12),
                                     child: Text(
-                                      (data[index].message).validate(),
+                                      (data[index].parts).validate(),
                                       style: secondaryTextStyle(color: white),
                                     ),
                                   ),
@@ -141,12 +145,17 @@ class MLChatScreenState extends State<MLChatScreen> {
                                   Container(
                                     decoration: boxDecorationWithRoundedCorners(
                                       borderRadius: radius(12),
-                                      backgroundColor: appStore.isDarkModeOn ? scaffoldDarkColor : mlColorLightGrey100,
+                                      backgroundColor: appStore.isDarkModeOn
+                                          ? scaffoldDarkColor
+                                          : mlColorLightGrey100,
                                     ),
                                     padding: EdgeInsets.all(12),
                                     child: Text(
-                                      (data[index].message).validate(),
-                                      style: secondaryTextStyle(color: appStore.isDarkModeOn ? white : black),
+                                      (data[index].parts).validate(),
+                                      style: secondaryTextStyle(
+                                          color: appStore.isDarkModeOn
+                                              ? white
+                                              : black),
                                     ),
                                   ).paddingOnly(right: 42.0).expand(),
                                 ],
@@ -172,7 +181,8 @@ class MLChatScreenState extends State<MLChatScreen> {
           child: Row(
             children: [
               16.width,
-              Icon(CupertinoIcons.smiley, size: 22, color: Colors.grey.shade600),
+              Icon(CupertinoIcons.smiley,
+                  size: 22, color: Colors.grey.shade600),
               8.width,
               Icon(Icons.image_outlined, size: 22, color: Colors.grey.shade600),
               8.width,
@@ -187,7 +197,9 @@ class MLChatScreenState extends State<MLChatScreen> {
                   hintStyle: secondaryTextStyle(size: 16),
                 ),
               ).expand(),
-              Icon(Icons.send_outlined, size: 24, color: Colors.blue).paddingAll(4.0).onTap(
+              Icon(Icons.send_outlined, size: 24, color: Colors.blue)
+                  .paddingAll(4.0)
+                  .onTap(
                 () {
                   addMessage();
                   messageController.clear();
@@ -204,7 +216,7 @@ class MLChatScreenState extends State<MLChatScreen> {
   void addMessage() {
     setState(
       () {
-        data.insert(0, MLInboxData(id: 0, message: messageController.text));
+        data.insert(0, MLInboxData(id: 0, parts: messageController.text));
       },
     );
   }
