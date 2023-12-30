@@ -106,6 +106,7 @@ class MLDiseaseScreenState extends State<MLDiseaseScreen> {
                   if (index == 0) {
                     return MLDieaseaseComponent();
                   }
+                  return null;
                 },
               ),
             ),

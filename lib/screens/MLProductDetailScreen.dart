@@ -98,6 +98,7 @@ class MLProductDetailScreenState extends State<MLProductDetailScreen> {
                       if (index == 0) {
                         return MLProductDetailComponent();
                       }
+                      return null;
                     },
                   ),
                 ),
