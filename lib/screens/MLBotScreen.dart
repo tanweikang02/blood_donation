@@ -34,6 +34,16 @@ class LoadingScreen extends StatelessWidget {
   }
 }
 
+class LoadingChatBubble extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return LoadingAnimationWidget.waveDots(
+      color: Colors.black,
+      size: 50,
+    );
+  }
+}
+
 class MLBotScreenState extends State<MLBotScreen> {
   TextEditingController messageController = TextEditingController();
   List<MLInboxData> data = [];
@@ -58,8 +68,8 @@ class MLBotScreenState extends State<MLBotScreen> {
 
   Future<void> init() async {
     //
-    WidgetsFlutterBinding.ensureInitialized();
-    await Firebase.initializeApp();
+    // WidgetsFlutterBinding.ensureInitialized();
+    // await Firebase.initializeApp();
   }
 
   @override
@@ -177,7 +187,7 @@ class MLBotScreenState extends State<MLBotScreen> {
                                           ),
                                         ],
                                       );
-                                    } else {
+                                    } else if (data[index].id == 1) {
                                       return Column(
                                         children: [
                                           8.height,
@@ -218,6 +228,43 @@ class MLBotScreenState extends State<MLBotScreen> {
                                               )
                                                   .paddingOnly(right: 42.0)
                                                   .expand(),
+                                            ],
+                                          ),
+                                        ],
+                                      ).paddingOnly(right: 32.0);
+                                    } else {
+                                      return Column(
+                                        children: [
+                                          8.height,
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              CircleAvatar(
+                                                backgroundColor: Colors.yellow,
+                                                child: Image.asset(
+                                                  ml_ic_doctor_image!,
+                                                  fit: BoxFit.fill,
+                                                ).cornerRadiusWithClipRRect(
+                                                    30.0),
+                                              ),
+                                              8.width,
+                                              Container(
+                                                decoration:
+                                                    boxDecorationWithRoundedCorners(
+                                                  borderRadius: radius(12.0),
+                                                  backgroundColor:
+                                                      appStore.isDarkModeOn
+                                                          ? scaffoldDarkColor
+                                                          : mlColorLightGrey100,
+                                                ),
+                                                padding: EdgeInsets.only(
+                                                    left: 16.0, right: 16.0),
+                                                child: LoadingChatBubble(),
+                                              ).paddingOnly(right: 42.0)
+                                              // .expand(),
                                             ],
                                           ),
                                         ],
@@ -267,9 +314,12 @@ class MLBotScreenState extends State<MLBotScreen> {
                         .paddingAll(4.0)
                         .onTap(
                       () {
-                        sendMessage();
-                        addMessage();
-                        messageController.clear();
+                        if (messageController.text != "") {
+                          sendMessage();
+                          addMessage();
+                          addLoadingMessage();
+                          messageController.clear();
+                        }
                       },
                     ),
                     8.width,
@@ -292,8 +342,19 @@ class MLBotScreenState extends State<MLBotScreen> {
       return;
   }
 
+  void addLoadingMessage() {
+    if (messageController.text != "") {
+      setState(
+        () {
+          data.add(MLInboxData(id: 2, parts: "", role: "user"));
+        },
+      );
+    } else
+      return;
+  }
+
   Future<void> sendMessage() async {
-    print("test send bot");
+    // print("test send bot");
     FirebaseFunctions functions =
         FirebaseFunctions.instanceFor(region: "us-central1");
     // Ideal time to initialize
@@ -309,6 +370,7 @@ class MLBotScreenState extends State<MLBotScreen> {
       print(message);
       setState(
         () {
+          data.removeLast();
           data.add(MLInboxData(id: 1, parts: message, role: "model"));
         },
       );
@@ -318,21 +380,6 @@ class MLBotScreenState extends State<MLBotScreen> {
       print(error.message);
     }
   }
-
-  // Future<List> getChat(){
-  //   final result = await FirebaseFunctions.instance.httpsCallable("sendChatHistory").call({});
-  //   List _response = result.data as List;
-  //   return _response;
-  // }
-
-  // Example
-  // Future<void> getChat() async {
-  //   HttpsCallable callable =
-  //       FirebaseFunctions.instance.httpsCallable('sendChatHistory');
-  //   final results = await callable();
-  //   List chat = results.data;
-  //   print(chat);
-  // }
 
   // Emulator
   Future<List<MLInboxData>> getChat() async {
@@ -348,3 +395,20 @@ class MLBotScreenState extends State<MLBotScreen> {
     return chat.map<MLInboxData>((item) => MLInboxData.fromJson(item)).toList();
   }
 }
+
+
+
+  // Future<List> getChat(){
+  //   final result = await FirebaseFunctions.instance.httpsCallable("sendChatHistory").call({});
+  //   List _response = result.data as List;
+  //   return _response;
+  // }
+
+  // Example
+  // Future<void> getChat() async {
+  //   HttpsCallable callable =
+  //       FirebaseFunctions.instance.httpsCallable('sendChatHistory');
+  //   final results = await callable();
+  //   List chat = results.data;
+  //   print(chat);
+  // }
