@@ -71,6 +71,7 @@ class MLConfirmOrderScreenState extends State<MLConfirmOrderScreen> {
                       if (index == 0) {
                         return MLOrderSuccessComponent();
                       }
+                      return null;
                     },
                   ),
                 ),
