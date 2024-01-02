@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:medilab_prokit/main.dart';
@@ -40,7 +41,7 @@ class MapScreenState extends State<MapScreen>
     _center = LatLng(p.latitude, p.longitude);
 
     mapMarkers = {
-        Marker(
+      Marker(
         icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
         markerId: MarkerId("You"),
         position: _center,
@@ -48,51 +49,49 @@ class MapScreenState extends State<MapScreen>
           title: "You",
         ),
       ),
-      Marker(
-        icon: BitmapDescriptor.defaultMarker,
-        markerId: MarkerId("Sunway Medical Centre"),
-        position: LatLng(3.0725, 101.6066),
-        infoWindow: InfoWindow(
-          title: "Sunway Medical Centre",
-          snippet: "Click to learn more",
-          onTap: () => DonationEventScreen(event: DonationEvent(name: "Sunway de Blood Donation", description: "Sun the blood", host: "Sunway Group", locationName: "Sunway Medical Centre", startDateTime: DateTime.now(), endDateTime: DateTime.now()),).launch(context),
-        ),
-      ),
     };
 
-    // TODO: retrieve event data from firestore
-    // mapMarkers = from firestore
-                  // Marker(
-                  //   markerId: MarkerId("Donation Event"),
-                  //   position: LatLng(3.0725, 101.6066),
-                  //   infoWindow: InfoWindow(
-                  //     title: "Sunway Medical Centre",
-                  //     snippet: "Click to learn more",
-                  //     onTap: () => DonationEventScreen(event: event,).launch(context),
-                  //   ),
-                  // ),
+    FirebaseFirestore db = FirebaseFirestore.instance;
 
-    setState(() { });
+    await db.collection("donation events").get().then((event) {
+      for (var doc in event.docs) {
+        print("${doc.id} => ${doc.data()}");
+
+        var e = DonationEvent.fromMap(doc.data());
+        mapMarkers.add(Marker(
+          icon: BitmapDescriptor.defaultMarker,
+          markerId: MarkerId(e.id),
+          position: e.latlng!,
+          infoWindow: InfoWindow(
+            title: e.locationName,
+            snippet: "Click to learn more",
+            onTap: () => DonationEventScreen(event: e).launch(context),
+          ),
+        ));
+      }
+    });
+
+    setState(() {});
   }
 
   Future<Position> _determinePosition() async {
-      LocationPermission permission;
+    LocationPermission permission;
 
-      permission = await Geolocator.checkPermission();
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        permission = await Geolocator.requestPermission();
-        if (permission == LocationPermission.denied) {
-          return Future.error('Location permissions are denied');
-        }
+        return Future.error('Location permissions are denied');
       }
-
-      if (permission == LocationPermission.deniedForever) {
-        return Future.error(
-            'Location permissions are permanently denied, we cannot request permissions.');
-      }
-
-      return await Geolocator.getCurrentPosition();
     }
+
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
+    }
+
+    return await Geolocator.getCurrentPosition();
+  }
 
   @override
   void setState(fn) {

@@ -114,7 +114,7 @@ class _CreateBloodRequestScreenState extends State<CreateBloodRequestScreen> {
                     width: context.width(),
                     color: mlPrimaryColor,
                     onTap: () {
-                      // TODO: add firestore/cloud function to create blood requests
+                      // TODO: add firestore/cloud function to create blood requests & send push notifications
                     },
                     child: Text('Create >',
                         style: boldTextStyle(color: white),
