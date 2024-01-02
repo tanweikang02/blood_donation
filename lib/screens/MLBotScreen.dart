@@ -68,8 +68,8 @@ class MLBotScreenState extends State<MLBotScreen> {
 
   Future<void> init() async {
     //
-    WidgetsFlutterBinding.ensureInitialized();
-    await Firebase.initializeApp();
+    // WidgetsFlutterBinding.ensureInitialized();
+    // await Firebase.initializeApp();
   }
 
   @override
