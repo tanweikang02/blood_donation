@@ -4,6 +4,7 @@ import 'package:medilab_prokit/components/MLConfirmAppointmentComponent.dart';
 import 'package:medilab_prokit/components/MLDoctorListComponent.dart';
 import 'package:medilab_prokit/components/MLHospitalListComponent.dart';
 import 'package:medilab_prokit/components/MLPatientComponent.dart';
+import 'package:medilab_prokit/model/BloodRequest.dart';
 import 'package:medilab_prokit/model/MLAppointmentData.dart';
 import 'package:medilab_prokit/model/MLBookAppointmentData.dart';
 import 'package:medilab_prokit/model/MLCovidData.dart';
@@ -25,11 +26,14 @@ import 'package:medilab_prokit/model/MLSpecialistData.dart';
 import 'package:medilab_prokit/model/MLTopHospitalData.dart';
 import 'package:medilab_prokit/model/MLVoucherData.dart';
 import 'package:medilab_prokit/model/MLWalkThroughData.dart';
+import 'package:medilab_prokit/screens/DonationHistoryListScreen.dart';
+import 'package:medilab_prokit/screens/ListBloodRequestScreen.dart';
 import 'package:medilab_prokit/screens/MLBookAppointmentScreen.dart';
 import 'package:medilab_prokit/screens/MLCovid19Screen.dart';
 import 'package:medilab_prokit/screens/MLDiseaseScreen.dart';
 import 'package:medilab_prokit/screens/MLOnlinePharmacyScreen.dart';
 import 'package:medilab_prokit/screens/MLVideoCounsultScreen.dart';
+import 'package:medilab_prokit/screens/MapScreen.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import 'MLImage.dart';
@@ -54,36 +58,14 @@ List<MLWalkThroughData> mlWalkThroughDataList() {
 
 List<MLServicesData> mlServiceDataList() {
   List<MLServicesData> list = [];
-  list.add(MLServicesData(
-      title: 'Clinic Visit',
-      icon: Icons.home_work_outlined,
-      image: ml_ic_dashClinicVisit!,
-      widget: MLBookAppointmentScreen(index: 0)));
-  list.add(MLServicesData(
-      title: 'Home Visit',
-      icon: Icons.home,
-      image: ml_ic_dashHomeVisit,
-      widget: MLBookAppointmentScreen(index: 0)));
-  list.add(MLServicesData(
-      title: 'Video Consult',
-      icon: Icons.video_call,
-      image: ml_ic_dashVideoCons,
-      widget: MLVideoConsultScreen()));
-  list.add(MLServicesData(
-      title: 'Pharmacy',
-      icon: Icons.local_hospital,
-      image: ml_ic_dashPharmacy,
-      widget: MLOnlinePharmacyScreen()));
-  list.add(MLServicesData(
-      title: 'Diseases',
-      icon: Icons.health_and_safety,
-      image: ml_ic_dashDisease,
-      widget: MLDiseaseScreen()));
-  list.add(MLServicesData(
-      title: 'Covid-19',
-      icon: Icons.supervised_user_circle_outlined,
-      image: ml_ic_dashCovid,
-      widget: MLCovidScreen()));
+  list.add(MLServicesData(title: 'Donation Spots', icon: Icons.home_work_outlined, image: ml_ic_dashClinicVisit!, widget: MapScreen()));
+  list.add(MLServicesData(title: 'Blood Requests', icon: Icons.home_work_outlined, image: ml_ic_dashDisease!, widget: ListBloodRequestScreen()));
+  list.add(MLServicesData(title: 'Donation History', icon: Icons.local_hospital, image: ml_ic_dashPharmacy, widget: DonationHistoryListScreen()));
+  list.add(MLServicesData(title: 'Home Visit', icon: Icons.home, image: ml_ic_dashHomeVisit, widget: MLBookAppointmentScreen(index: 0)));
+  list.add(MLServicesData(title: 'Video Consult', icon: Icons.video_call, image: ml_ic_dashVideoCons, widget: MLVideoConsultScreen()));
+  list.add(MLServicesData(title: 'Pharmacy', icon: Icons.local_hospital, image: ml_ic_dashPharmacy, widget: MLOnlinePharmacyScreen()));
+  // list.add(MLServicesData(title: 'Diseases', icon: Icons.health_and_safety, image: ml_ic_dashDisease, widget: MLDiseaseScreen()));
+  // list.add(MLServicesData(title: 'Covid-19', icon: Icons.supervised_user_circle_outlined, image: ml_ic_dashCovid, widget: MLCovidScreen()));
   return list;
 }
 
@@ -281,42 +263,12 @@ List<MLDepartmentData> mlServiceListDataList() {
 
 List<MLDoctorData> mlDoctorListDataList() {
   List<MLDoctorData> list = [];
-  list.add(MLDoctorData(
-      title: 'Dr. Edward Jenner',
-      subtitle: 'Endocrinology',
-      image: ml_ic_doctor_image,
-      rating: '4.8',
-      fees: '\$450'));
-  list.add(MLDoctorData(
-      title: 'Dr. Edward Jenner',
-      subtitle: 'Endocrinology',
-      image: ml_ic_doctor_image,
-      rating: '4.8',
-      fees: '\$450'));
-  list.add(MLDoctorData(
-      title: 'Dr. Edward Jenner',
-      subtitle: 'Endocrinology',
-      image: ml_ic_doctor_image,
-      rating: '4.8',
-      fees: '\$450'));
-  list.add(MLDoctorData(
-      title: 'Dr. Edward Jenner',
-      subtitle: 'Endocrinology',
-      image: ml_ic_doctor_image,
-      rating: '4.8',
-      fees: '\$450'));
-  list.add(MLDoctorData(
-      title: 'Dr. Edward Jenner',
-      subtitle: 'Endocrinology',
-      image: ml_ic_doctor_image,
-      rating: '4.8',
-      fees: '\$450'));
-  list.add(MLDoctorData(
-      title: 'Dr. Edward Jenner',
-      subtitle: 'Endocrinology',
-      image: ml_ic_doctor_image,
-      rating: '4.8',
-      fees: '\$450'));
+  list.add(MLDoctorData(title: 'Dr. Edward Jenner', subtitle: 'Endocrinology', image: ml_ic_doctor_image, rating: '4.8', fees: '\$450'));
+  list.add(MLDoctorData(title: 'Dr. Edward Jenner', subtitle: 'Endocrinology', image: ml_ic_doctor_image, rating: '4.8', fees: '\$450'));
+  list.add(MLDoctorData(title: 'Dr. Edward Jenner', subtitle: 'Endocrinology', image: ml_ic_doctor_image, rating: '4.8', fees: '\$450'));
+  list.add(MLDoctorData(title: 'Dr. Edward Jenner', subtitle: 'Endocrinology', image: ml_ic_doctor_image, rating: '4.8', fees: '\$450'));
+  list.add(MLDoctorData(title: 'Dr. Edward Jenner', subtitle: 'Endocrinology', image: ml_ic_doctor_image, rating: '4.8', fees: '\$450'));
+  list.add(MLDoctorData(title: 'Dr. Edward Jenner', subtitle: 'Endocrinology', image: ml_ic_doctor_image, rating: '4.8', fees: '\$450'));
   return list;
 }
 
