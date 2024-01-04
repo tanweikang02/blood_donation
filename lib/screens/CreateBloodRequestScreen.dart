@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:medilab_prokit/main.dart';
 import 'package:medilab_prokit/utils/MLColors.dart';
@@ -26,10 +28,42 @@ class _CreateBloodRequestScreenState extends State<CreateBloodRequestScreen> {
     "AB+"
   ];
 
-  TextEditingController bloodTypeController = TextEditingController();
+  TextEditingController locationController = TextEditingController();
+  TextEditingController descTextController = TextEditingController();
+  TextEditingController recipientNameController = TextEditingController();
   List<String> selectedBloodTypes = [];
 
-  FocusNode bloodTypeFocusNode = FocusNode();
+  FocusNode locationFocusNode = FocusNode();
+  FocusNode descTextFocusNode = FocusNode();
+  FocusNode recipientNameFocusNode = FocusNode();
+
+  // TODO: add firestore/cloud function to create blood requests & send push notifications
+  Future<void> raiseBloodRequest() async {
+    FirebaseFirestore db = FirebaseFirestore.instance;
+
+    await db.collection("blood requests").add({
+      "text": descTextController.text,
+      "location": locationController.text,
+      "date": DateTime.now(),
+      "bloodTypeNeeded": selectedBloodTypes,
+      "recipientName": recipientNameController.text
+    }).then((documentSnapshot) async {
+      print("Added Data with ID: ${documentSnapshot.id}");
+
+      FirebaseFunctions functions = FirebaseFunctions.instanceFor(region: "us-central1");
+      functions.useFunctionsEmulator("localhost", 5001);
+      HttpsCallable callable = functions.httpsCallable("sendNotifications");
+      final result = await callable(<String, dynamic>{
+        'bloodTypeNeeded': selectedBloodTypes,
+        'location': locationController.text,
+      });
+      bool success = result.data;
+
+      if (success) {
+        showConfirmDialog(context, "We have alerted people about your request!");
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,6 +93,8 @@ class _CreateBloodRequestScreenState extends State<CreateBloodRequestScreen> {
                 children: [
                   Text('Location', style: boldTextStyle()),
                   AppTextField(
+                    controller: locationController,
+                    focus: locationFocusNode,
                     textFieldType: TextFieldType.OTHER,
                     textStyle: primaryTextStyle(),
                     decoration: InputDecoration(
@@ -73,6 +109,8 @@ class _CreateBloodRequestScreenState extends State<CreateBloodRequestScreen> {
                   16.height,
                   Text('Description Text', style: boldTextStyle()),
                   AppTextField(
+                    controller: descTextController,
+                    focus: descTextFocusNode,
                     textFieldType: TextFieldType.MULTILINE,
                     textStyle: primaryTextStyle(),
                     decoration: InputDecoration(
@@ -98,6 +136,8 @@ class _CreateBloodRequestScreenState extends State<CreateBloodRequestScreen> {
                   16.height,
                   Text('Recipient Name (Optional)', style: boldTextStyle()),
                   AppTextField(
+                    controller: recipientNameController,
+                    focus: recipientNameFocusNode,
                     textFieldType: TextFieldType.OTHER,
                     textStyle: primaryTextStyle(),
                     decoration: InputDecoration(
@@ -114,7 +154,7 @@ class _CreateBloodRequestScreenState extends State<CreateBloodRequestScreen> {
                     width: context.width(),
                     color: mlPrimaryColor,
                     onTap: () {
-                      // TODO: add firestore/cloud function to create blood requests & send push notifications
+                      raiseBloodRequest();
                     },
                     child: Text('Create >',
                         style: boldTextStyle(color: white),
