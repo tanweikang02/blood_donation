@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:medilab_prokit/main.dart';
+import 'package:medilab_prokit/providers/appointment_provider.dart';
 import 'package:medilab_prokit/utils/MLCommon.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:medilab_prokit/model/MLTopHospitalData.dart';
 import 'package:medilab_prokit/utils/MLColors.dart';
-import 'package:medilab_prokit/utils/MLDataProvider.dart';
 import 'package:medilab_prokit/utils/MLImage.dart';
+import 'package:provider/provider.dart';
 
 class MLAppointmentDetailList extends StatefulWidget {
+  MLAppointmentDetailList();
   @override
   MLAppointmentDetailListState createState() => MLAppointmentDetailListState();
 }
 
 class MLAppointmentDetailListState extends State<MLAppointmentDetailList> {
-  List<MLTopHospitalData> topHospitalList = mlHospitalListDataList();
+  // List<MLTopHospitalData> topHospitalList = mlHospitalListDataList();
 
   @override
   void initState() {
@@ -34,7 +34,8 @@ class MLAppointmentDetailListState extends State<MLAppointmentDetailList> {
     return RichText(
       text: TextSpan(
         children: [
-          WidgetSpan(child: Icon(Icons.location_searching, size: 12).paddingRight(8)),
+          WidgetSpan(
+              child: Icon(Icons.location_searching, size: 12).paddingRight(8)),
           TextSpan(text: value, style: secondaryTextStyle(size: 12)),
         ],
       ),
@@ -57,75 +58,35 @@ class MLAppointmentDetailListState extends State<MLAppointmentDetailList> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             commonCachedNetworkImage(
-              (topHospitalList[0].image).validate(),
+              blood_donation_event.validate(),
               width: double.infinity,
               height: 150.0,
               fit: BoxFit.cover,
             ).cornerRadiusWithClipRRect(8.0),
             16.height,
-            Text((topHospitalList[0].title).validate(), style: boldTextStyle()),
+            Text(context.watch<AppointmentProvider>().name,
+                style: boldTextStyle()),
             16.height,
             Divider(thickness: 0.5),
             16.height,
-            mOption('Location'),
+            mOption('Date & Time'),
             8.height,
             Text(
-              topHospitalList[0].city.validate(),
+              context.watch<AppointmentProvider>().dateTime,
               style: primaryTextStyle(color: mlPrimaryColor),
             ).paddingLeft(18.0),
             16.height,
-            mOption('Service'),
-            4.height,
+            mOption('Address'),
+            8.height,
             Text(
-              'Endocrinology -' + topHospitalList[0].fees.validate(),
+              context.watch<AppointmentProvider>().address,
               style: primaryTextStyle(color: mlPrimaryColor),
             ).paddingLeft(18.0),
-            16.height,
-            Row(
-              children: [
-                Container(
-                  padding: EdgeInsets.only(top: 4),
-                  decoration: boxDecorationWithRoundedCorners(backgroundColor: mlColorCyan, borderRadius: radius(12)),
-                  child: Image.asset(ml_ic_doctor_image!, height: 50, width: 50),
-                ),
-                8.width,
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Doctor', style: secondaryTextStyle(color: appStore.isDarkModeOn ? white : blackColor)),
-                    8.height,
-                    Text('Dr. Stephen Chew', style: primaryTextStyle(color: mlPrimaryColor)),
-                  ],
-                ),
-              ],
-            ),
-            16.height,
-            Row(
-              children: [
-                Container(
-                  padding: EdgeInsets.only(top: 4.0),
-                  decoration: boxDecorationWithRoundedCorners(borderRadius: radius(12), backgroundColor: mlColorCyan),
-                  child: Image.asset(ml_ic_profile_picture!, height: 50, width: 50),
-                ),
-                8.width,
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Patient', style: secondaryTextStyle(color: appStore.isDarkModeOn ? white : blackColor)),
-                    8.height,
-                    Text('Kaixa Pham', style: primaryTextStyle(color: mlPrimaryColor)),
-                  ],
-                ),
-              ],
-            ),
-            16.height,
-            mOption('Service'),
-            4.height,
-            Text('Thu, Mar 18 -08:00 AM', style: primaryTextStyle(color: mlPrimaryColor)).paddingLeft(18.0),
             16.height,
             mOption('Payment Method'),
             4.height,
-            Text('Payment at the clinic', style: primaryTextStyle(color: mlPrimaryColor)).paddingLeft(18.0),
+            Text('Cash', style: primaryTextStyle(color: mlPrimaryColor))
+                .paddingLeft(18.0),
           ],
         ),
       ).paddingAll(16.0),
