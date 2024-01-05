@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:medilab_prokit/main.dart';
 import 'package:medilab_prokit/model/DonationEvent.dart';
@@ -24,6 +25,10 @@ class MapScreenState extends State<MapScreen>
   late GoogleMapController mapController;
   LatLng _center = LatLng(3.07256580057994, 101.6066459027185);
   Set<Marker> mapMarkers = {};
+  FirebaseFirestore db = FirebaseFirestore.instance;
+  String name =
+      "Chua E Heng"; // NOTE: NEED TO DO FIREBASE AUTH, TEMPORARY SOLUTION
+  var noEventInCity = true; // Used to check if there are any events in city
 
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
@@ -38,9 +43,10 @@ class MapScreenState extends State<MapScreen>
 
   Future<void> init() async {
     Position p = await _determinePosition();
+    // _center = LatLng(3.0997, 101.5661);
     _center = LatLng(p.latitude, p.longitude);
 
-    mapMarkers = {
+    mapMarkers.add(
       Marker(
         icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
         markerId: MarkerId("You"),
@@ -49,11 +55,19 @@ class MapScreenState extends State<MapScreen>
           title: "You",
         ),
       ),
-    };
+    );
 
-    FirebaseFirestore db = FirebaseFirestore.instance;
+    // Get Current Location's City
+    List<Placemark> placemarks =
+        // await placemarkFromCoordinates(3.0997, 101.5661);
+        await placemarkFromCoordinates(p.latitude, p.longitude);
+    String? currentCity = placemarks[0].locality;
 
     await db.collection("donation events").get().then((event) {
+      // Used to check if there are any events in city
+      // var noEventInCity = true;
+
+      // Adding Markers to Map
       for (var doc in event.docs) {
         print("${doc.id} => ${doc.data()}");
 
@@ -68,8 +82,39 @@ class MapScreenState extends State<MapScreen>
             onTap: () => DonationEventScreen(event: e).launch(context),
           ),
         ));
+
+        // Check if document's city == current city
+        if (e.city == currentCity) {
+          noEventInCity = false;
+        }
       }
     });
+
+    if (noEventInCity) {
+      bool hasUserVoted = await checkIfUserVoted(currentCity!, name);
+
+      if (!hasUserVoted) {
+        showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+                  title: Text("No events in your city"),
+                  content: Text(
+                      "There are no events in your city. Are you interested to have donation events in your city?"),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        upsertInterestedUser(currentCity!, name);
+                      },
+                      child: Text('Yes'),
+                    ),
+                    TextButton(
+                        onPressed: () => Navigator.pop(context),
+                        child: Text("No"))
+                  ],
+                ));
+      }
+    }
 
     setState(() {});
   }
@@ -91,6 +136,43 @@ class MapScreenState extends State<MapScreen>
     }
 
     return await Geolocator.getCurrentPosition();
+  }
+
+  // Upsert interested user to event
+  Future<void> upsertInterestedUser(String city, String username) async {
+    QuerySnapshot querySnapshot =
+        await db.collection("city_votes").where("city", isEqualTo: city).get();
+
+    if (querySnapshot.docs.length > 0) {
+      // Increment vote count
+      int currentInterestedCount = querySnapshot.docs[0]["vote"] ?? 0;
+
+      // Update city_votes
+      await db
+          .collection("city_votes")
+          .doc(querySnapshot.docs[0].id)
+          .update({"vote": currentInterestedCount + 1});
+    } else {
+      // Create
+      await db.collection("city_votes").add({'city': city, 'vote': 1});
+    }
+
+    // Add user to user_city_votes
+    await db.collection("user_city_votes").add({
+      'name': username,
+      'voted_city': city,
+    });
+  }
+
+  // Check if user has voted
+  Future<bool> checkIfUserVoted(String city, String username) async {
+    QuerySnapshot querySnapshot = await db
+        .collection("user_city_votes")
+        .where("name", isEqualTo: username)
+        .where("voted_city", isEqualTo: city)
+        .get();
+
+    return querySnapshot.docs.length > 0;
   }
 
   @override
