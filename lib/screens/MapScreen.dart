@@ -73,7 +73,7 @@ class MapScreenState extends State<MapScreen>
         var e = DonationEvent.fromMap(doc.data());
         mapMarkers.add(Marker(
           icon: BitmapDescriptor.defaultMarker,
-          markerId: MarkerId(e.id),
+          markerId: MarkerId(doc.id),
           position: e.latlng!,
           infoWindow: InfoWindow(
             title: e.locationName,

@@ -2,7 +2,6 @@
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class DonationEvent {
-  String id;
   String? name;
   String? description;
   String? host;
@@ -12,7 +11,7 @@ class DonationEvent {
   DateTime? startDateTime;
   DateTime? endDateTime;
 
-  DonationEvent(
+ DonationEvent(
       {required this.id,
       this.name,
       this.description,
@@ -24,8 +23,7 @@ class DonationEvent {
       this.city});
 
   DonationEvent.fromMap(Map<String, dynamic> map)
-      : id = map["id"],
-        name = map["name"],
+      : name = map["name"],
         description = map["description"],
         host = map["host"],
         locationName = map["locationName"],

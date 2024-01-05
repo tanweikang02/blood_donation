@@ -1,9 +1,11 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:medilab_prokit/extensions/datetime.dart';
 import 'package:medilab_prokit/model/BloodRequest.dart';
+import 'package:medilab_prokit/model/DonationRecord.dart';
 import 'package:medilab_prokit/model/MLDoctorData.dart';
 import 'package:medilab_prokit/screens/CreateBloodRequestScreen.dart';
 import 'package:medilab_prokit/screens/MLDoctorDetailScreen.dart';
@@ -19,8 +21,36 @@ import 'package:medilab_prokit/model/DonationEvent.dart';
 import 'package:medilab_prokit/screens/MLAddVoucherScreen.dart';
 import 'package:medilab_prokit/utils/MLColors.dart';
 
-class ListBloodRequestScreen extends StatelessWidget {
-  final List<BloodRequest> requests = bloodRequestDataList();
+class ListBloodRequestScreen extends StatefulWidget {
+  @override
+  State<ListBloodRequestScreen> createState() => _ListBloodRequestScreenState();
+}
+
+class _ListBloodRequestScreenState extends State<ListBloodRequestScreen> {
+  List<BloodRequest> requests = [];
+
+  @override
+  void initState() {
+    super.initState();
+    fetchBloodRequests();
+  }
+
+  Future<void> fetchBloodRequests() async {
+    FirebaseFirestore db = FirebaseFirestore.instance;
+
+    await db.collection("blood requests").get().then((req) {
+      for (var doc in req.docs) {
+        print("${doc.id} => ${doc.data()}");
+
+        var r = BloodRequest.fromMap(doc.data());
+        requests.add(r);
+      }
+    });
+
+    setState(() {
+      
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
