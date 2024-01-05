@@ -12,8 +12,7 @@ class DonationEvent {
   DateTime? endDateTime;
 
  DonationEvent(
-      {required this.id,
-      this.name,
+      {this.name,
       this.description,
       this.host,
       this.locationName,
