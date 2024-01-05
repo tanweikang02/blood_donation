@@ -9,7 +9,6 @@ import 'package:medilab_prokit/utils/MLCommon.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:medilab_prokit/utils/MLColors.dart';
-import 'package:medilab_prokit/utils/MLString.dart';
 
 class MapScreen extends StatefulWidget {
   static String tag = '/MapScreen';
