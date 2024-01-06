@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cloud_functions/cloud_functions.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -151,7 +152,7 @@ class MLBotScreenState extends State<MLBotScreen> {
                                   physics: NeverScrollableScrollPhysics(),
                                   itemCount: data.length,
                                   itemBuilder: (context, index) {
-                                    if (data[index].id == 0) {
+                                    if (data[index].role == "user") {
                                       return Column(
                                         children: [
                                           8.height,
@@ -187,7 +188,7 @@ class MLBotScreenState extends State<MLBotScreen> {
                                           ),
                                         ],
                                       );
-                                    } else if (data[index].id == 1) {
+                                    } else if (data[index].role == "model") {
                                       return Column(
                                         children: [
                                           8.height,
@@ -332,10 +333,21 @@ class MLBotScreenState extends State<MLBotScreen> {
 
   void addMessage() {
     if (messageController.text != "") {
+      FirebaseFirestore db = FirebaseFirestore.instance;
+      final msg = <String, dynamic>{
+        "type": 0,
+        "parts": messageController.text,
+        "role": "user",
+        "created_at": Timestamp.now()
+      };
+
+      db.collection("chat_history").add(msg).then((DocumentReference doc) =>
+          print('DocumentSnapshot added with ID: ${doc.id}'));
+
       setState(
         () {
-          data.add(
-              MLInboxData(id: 0, parts: messageController.text, role: "user"));
+          data.add(MLInboxData(
+              type: 0, parts: messageController.text, role: "user"));
         },
       );
     } else
@@ -346,7 +358,7 @@ class MLBotScreenState extends State<MLBotScreen> {
     if (messageController.text != "") {
       setState(
         () {
-          data.add(MLInboxData(id: 2, parts: "", role: "user"));
+          data.add(MLInboxData(type: 2, parts: "", role: "loading"));
         },
       );
     } else
@@ -354,7 +366,7 @@ class MLBotScreenState extends State<MLBotScreen> {
   }
 
   Future<void> sendMessage() async {
-    // print("test send bot");
+    FirebaseFirestore db = FirebaseFirestore.instance;
     FirebaseFunctions functions =
         FirebaseFunctions.instanceFor(region: "us-central1");
     // Ideal time to initialize
@@ -367,11 +379,20 @@ class MLBotScreenState extends State<MLBotScreen> {
       final results = await callable
           .call({"data": jsonData, "text": messageController.text});
       String message = results.data;
-      print(message);
+      final msg = <String, dynamic>{
+        "type": 1,
+        "parts": message,
+        "role": "model",
+        "created_at": Timestamp.now()
+      };
+
+      db.collection("chat_history").add(msg).then((DocumentReference doc) =>
+          print('DocumentSnapshot added with ID: ${doc.id}'));
+
       setState(
         () {
           data.removeLast();
-          data.add(MLInboxData(id: 1, parts: message, role: "model"));
+          data.add(MLInboxData(type: 1, parts: message, role: "model"));
         },
       );
     } on FirebaseFunctionsException catch (error) {
@@ -383,16 +404,31 @@ class MLBotScreenState extends State<MLBotScreen> {
 
   // Emulator
   Future<List<MLInboxData>> getChat() async {
-    FirebaseFunctions functions =
-        FirebaseFunctions.instanceFor(region: "us-central1");
+    FirebaseFirestore db = FirebaseFirestore.instance;
+    List<MLInboxData> chat_data = [];
 
-    // Ideal time to initialize
-    functions.useFunctionsEmulator("localhost", 5001);
-    HttpsCallable callable = functions.httpsCallable('sendChatHistory');
-    final results = await callable.call({});
-    List chat = results.data;
-    print(chat);
-    return chat.map<MLInboxData>((item) => MLInboxData.fromJson(item)).toList();
+    await db
+        .collection("chat_history")
+        .orderBy("created_at")
+        .get()
+        .then((event) {
+      for (var doc in event.docs) {
+        chat_data.add(MLInboxData.fromJson(doc.data()));
+      }
+    });
+
+    return chat_data;
+
+    // FirebaseFunctions functions =
+    //     FirebaseFunctions.instanceFor(region: "us-central1");
+
+    // // Ideal time to initialize
+    // functions.useFunctionsEmulator("localhost", 5001);
+    // HttpsCallable callable = functions.httpsCallable('sendChatHistory');
+    // final results = await callable.call({});
+    // List chat = results.data;
+    // print(chat);
+    // return chat.map<MLInboxData>((item) => MLInboxData.fromJson(item)).toList();
   }
 }
 
