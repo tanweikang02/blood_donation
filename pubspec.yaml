@@ -30,6 +30,8 @@ dependencies:
   cloud_firestore: ^4.13.6
   cloud_functions: ^4.5.8
   loading_animation_widget:
+  table_calendar: ^3.0.9
+  provider: ^6.1.1
   geocoding: ^2.1.1
 
 dependency_overrides:

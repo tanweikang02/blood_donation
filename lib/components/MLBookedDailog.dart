@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:medilab_prokit/main.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:medilab_prokit/utils/MLColors.dart';
 import 'package:medilab_prokit/utils/MLImage.dart';
@@ -14,11 +13,16 @@ class MLBookedDialog extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Image.asset(ml_ic_appointment_booked.toString(), width: 250, height: 200, fit: BoxFit.cover),
-            Text('Appointment Booked', style: boldTextStyle(size: 24)),
+            Image.asset(ml_ic_appointment_booked.toString(),
+                width: 250, height: 200, fit: BoxFit.cover),
+            Text(
+              'Appointment Pending Approval',
+              style: boldTextStyle(size: 24),
+              textAlign: TextAlign.center,
+            ),
             4.height,
             Text(
-              'Please check the app carefully to keep your health better',
+              'If the appointment is approved by any hospital, you will receive a confirmation message via phone.',
               style: secondaryTextStyle(size: 12),
               textAlign: TextAlign.center,
             ),
@@ -27,25 +31,9 @@ class MLBookedDialog extends StatelessWidget {
               height: 50,
               width: context.width(),
               color: mlPrimaryColor,
-              child: Text("Add to Calender", style: primaryTextStyle(color: whiteColor)),
+              child: Text("Close", style: primaryTextStyle(color: whiteColor)),
               onTap: () {
                 finish(context);
-                finish(context);
-              },
-            ),
-            16.height,
-            Container(
-              alignment: Alignment.center,
-              height: 50,
-              width: context.width(),
-              decoration: boxDecorationWithRoundedCorners(
-                borderRadius: radius(12),
-                border: Border.all(color: mlColorBlue),
-                backgroundColor: appStore.isDarkModeOn ? black : white,
-              ),
-              child: Text("Close", style: primaryTextStyle(color: mlPrimaryColor)),
-            ).onTap(
-              () {
                 finish(context);
               },
             ),
