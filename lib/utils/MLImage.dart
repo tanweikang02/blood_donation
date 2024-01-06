@@ -91,3 +91,5 @@ const String? ml_prescription3 = 'images/ml_prescription3.png';
 const String? ml_prescription4 = 'images/ml_prescription4.png';
 
 const String? blood_donation_event = "images/blood_donation_event.jpg";
+const String? leaderboard_card = "images/leaderboard-bg.jpg";
+const String? anonymous_avatar = "images/anonymous_avatar.jpg";
