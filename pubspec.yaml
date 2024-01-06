@@ -30,6 +30,7 @@ dependencies:
   cloud_firestore: ^4.13.6
   cloud_functions: ^4.5.8
   loading_animation_widget:
+  fl_chart: ^0.66.0
 
 dependency_overrides:
   intl: ^0.18.1
