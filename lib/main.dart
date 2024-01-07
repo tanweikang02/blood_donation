@@ -8,6 +8,7 @@ import 'package:medilab_prokit/store/AppStore.dart';
 import 'package:medilab_prokit/utils/AppTheme.dart';
 import 'package:medilab_prokit/utils/MLDataProvider.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 
 AppStore appStore = AppStore();
 
@@ -30,7 +31,29 @@ Future<void> main() async {
   defaultRadius = 10;
   defaultToastGravityGlobal = ToastGravity.BOTTOM;
 
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    print('Got a message whilst in the foreground!');
+    print('Message data: ${message.data}');
+
+    if (message.notification != null) {
+      print('Message also contained a notification: ${message.notification}');
+    }
+  });
+
+  getNotification();
+
   runApp(const MyApp());
+}
+
+Future<void> getNotification() async {
+  FirebaseFunctions functions =
+      FirebaseFunctions.instanceFor(region: "us-central1");
+
+  functions.useFunctionsEmulator("localhost", 5001);
+
+  HttpsCallable callable = functions.httpsCallable('getNotification');
+
+  await callable.call({});
 }
 
 Future<void> requestNotificationPermission() async {
@@ -38,7 +61,7 @@ Future<void> requestNotificationPermission() async {
 
   NotificationSettings settings = await messaging.requestPermission(
     alert: true,
-    announcement: false,
+    announcement: true,
     badge: true,
     carPlay: false,
     criticalAlert: false,
