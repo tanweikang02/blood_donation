@@ -31,6 +31,12 @@ dependencies:
   cloud_functions: ^4.5.8
   loading_animation_widget:
   fl_chart: ^0.66.0
+  table_calendar: ^3.0.9
+  provider: ^6.1.1
+  geocoding: ^2.1.1
+  badges: ^3.1.2
+  firebase_analytics: ^10.8.0
+  fluttermoji: ^1.0.2
 
 dependency_overrides:
   intl: ^0.18.1

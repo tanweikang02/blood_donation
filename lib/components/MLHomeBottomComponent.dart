@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medilab_prokit/screens/LeaderboardScreen.dart';
 import 'package:medilab_prokit/utils/MLCommon.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:medilab_prokit/model/MLDepartmentData.dart';
@@ -42,7 +43,9 @@ class MLHomeBottomComponentState extends State<MLHomeBottomComponent> {
         Row(
           children: [
             Text(mlDepartment!, style: boldTextStyle(size: 18)).expand(),
-            Text(mlView_all!, style: secondaryTextStyle(color: mlColorBlue)),
+            GestureDetector(
+              onTap: () => LeaderboardScreen().launch(context),
+              child: Text(mlView_all!, style: secondaryTextStyle(color: mlColorBlue)),),
             4.width,
             Icon(Icons.keyboard_arrow_right, color: mlColorBlue, size: 16),
           ],

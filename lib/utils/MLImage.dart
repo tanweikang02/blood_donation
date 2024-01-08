@@ -2,7 +2,8 @@ import 'package:medilab_prokit/utils/MLString.dart';
 
 const String? ml_ic_medilab_logo = 'images/ml_medilabLogo.png';
 
-const String? ml_ic_register_indicator = '$BaseUrl/images/mediLab/ml_loginindicator.png';
+const String? ml_ic_register_indicator =
+    '$BaseUrl/images/mediLab/ml_loginindicator.png';
 
 const String? ml_ic_slide_one = '$BaseUrl/images/mediLab/ml_slide_one.png';
 const String? ml_ic_slide_two = '$BaseUrl/images/mediLab/ml_slide_two.png';
@@ -23,7 +24,8 @@ const String? ml_ic_dashCovid = 'images/ml_dashboardCovid.png';
 
 const String? ml_ic_hospital_one = 'images/ml_tophospitalone.jpg';
 const String? ml_ic_hospital_two = 'images/ml_tophospitalTwo.jpeg';
-const String? ml_ic_hospital_three = '$BaseUrl/images/mediLab/ml_tophospitalThree.jpg';
+const String? ml_ic_hospital_three =
+    '$BaseUrl/images/mediLab/ml_tophospitalThree.jpg';
 const String? ml_ic_hospital_four = 'images/ml_tophospitalFour.jpg';
 const String? ml_ic_doctor_image = 'images/ml_doctor.png';
 const String? ml_ic_bank_payment_one = 'images/ml_bankcard_one.png';
@@ -50,12 +52,14 @@ const String? ml_ic_logo_google = 'images/ml_google.png';
 const String? ml_ic_slide1 = 'images/slider.png';
 const String? ml_ic_order_success = 'images/ml_order_success.png';
 
-const String? ml_ic_pharmacySlide1 = '$BaseUrl/images/mediLab/ml_pharmacySlideOne.jpg';
+const String? ml_ic_pharmacySlide1 =
+    '$BaseUrl/images/mediLab/ml_pharmacySlideOne.jpg';
 const String? ml_ic_pharmacySlide2 = 'images/ml_pharmacySlideTwo.jpeg';
 const String? ml_ic_pharmacySlide3 = 'images/ml_pharmacySlideThree.jpg';
 const String? ml_ic_pharmacySlide4 = 'images/ml_pharmacySlideFour.jpeg';
 
-const String? ml_ic_diseaseSlide1 = '$BaseUrl/images/mediLab/ml_diseaseSlideOne.jpg';
+const String? ml_ic_diseaseSlide1 =
+    '$BaseUrl/images/mediLab/ml_diseaseSlideOne.jpg';
 const String? ml_ic_diseaseSlide2 = 'images/ml_diseaseSlideTwo.jpg';
 const String? ml_ic_diseaseSlide3 = 'images/ml_diseaseSlideThree.jpg';
 
@@ -68,7 +72,8 @@ const String? ml_ic_lungs_specialist = 'images/ml_lungsSpecialist.png';
 const String? ml_ic_tooth_specialist = 'images/ml_toothSpecialist.png';
 
 const String? ml_ic_headacheDisease = 'images/ml_headache.jpeg';
-const String? ml_ic_soreThroatDisease = '$BaseUrl/images/mediLab/ml_soreThroatDisease.jpg';
+const String? ml_ic_soreThroatDisease =
+    '$BaseUrl/images/mediLab/ml_soreThroatDisease.jpg';
 const String? ml_ic_ThroatPainDisease = 'images/ml_throatDisease.jpg';
 const String? ml_ic_toothDisease = 'images/ml_toothDisease.jpg';
 
@@ -84,10 +89,18 @@ const String? ml_ic_mediIconFour = 'images/ml_mediIconFour.png';
 const String? ml_ic_mediIconFive = 'images/ml_mediIconFive.png';
 const String? ml_ic_mediIconSix = 'images/ml_mediIconSix.png';
 
-const String? ml_ic_verifyindicator = '$BaseUrl/images/mediLab/ml_verifyindicator.png';
+const String? ml_ic_verifyindicator =
+    '$BaseUrl/images/mediLab/ml_verifyindicator.png';
 const String? ml_prescription1 = 'images/ml_prescription1.png';
 const String? ml_prescription2 = 'images/ml_prescription2.png';
 const String? ml_prescription3 = 'images/ml_prescription3.png';
 const String? ml_prescription4 = 'images/ml_prescription4.png';
 
 const String? blood_donation_event = "images/blood_donation_event.jpg";
+const String? leaderboard_card = "images/leaderboard-bg.jpg";
+const String? anonymous_avatar = "images/anonymous_avatar.jpg";
+
+// Badges
+const String badge_1 = "images/bloodBadge.png";
+const String badge_2 = "images/firstBloodDonation.png";
+const String badge_3 = "images/lifesaverBadge.png";

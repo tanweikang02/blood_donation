@@ -1,8 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttermoji/fluttermoji.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:medilab_prokit/components/MLProfileBottomComponent.dart';
 import 'package:medilab_prokit/utils/MLColors.dart';
-import 'package:medilab_prokit/utils/MLImage.dart';
+import 'package:medilab_prokit/screens/AvatarScreen.dart';
+import 'package:medilab_prokit/model/User.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
 class MLProfileFragment extends StatefulWidget {
   static String tag = '/MLProfileFragment';
@@ -12,14 +16,31 @@ class MLProfileFragment extends StatefulWidget {
 }
 
 class MLProfileFragmentState extends State<MLProfileFragment> {
+  FirebaseFirestore db = FirebaseFirestore.instance;
+  User? currentUser;
+
+  Future<void> fetchUsers() async {
+    String name = "Casey Tan";
+
+    await db
+        .collection("users")
+        .where("name", isEqualTo: name)
+        .get()
+        .then((req) {
+      for (var doc in req.docs) {
+        print("${doc.id} => ${doc.data()}");
+
+        currentUser = User.fromMap(doc.data());
+      }
+    });
+
+    setState(() {});
+  }
+
   @override
   void initState() {
     super.initState();
-    init();
-  }
-
-  Future<void> init() async {
-    //
+    fetchUsers();
   }
 
   @override
@@ -43,11 +64,40 @@ class MLProfileFragmentState extends State<MLProfileFragment> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      CircleAvatar(child: Image.asset(ml_ic_profile_picture!), radius: 40.0, backgroundColor: mlColorCyan),
+                      GestureDetector(
+                          onTap: () => AvatarScreen().launch(context),
+                          child: CircleAvatar(
+                              child: FluttermojiCircleAvatar(
+                                backgroundColor: Colors.transparent,
+                              ),
+                              radius: 40,
+                              backgroundColor: mlColorCyan)),
                       8.height,
-                      Text('Kaixa Pham', style: boldTextStyle(color: white, size: 24)),
+                      Text(
+                          '${currentUser != null ? currentUser?.name : 'John Doe'}',
+                          style: boldTextStyle(color: white, size: 24)),
                       4.height,
-                      Text('johnsmith@gmail.com', style: secondaryTextStyle(color: white, size: 16)),
+                      Text(
+                          '${currentUser != null ? currentUser?.email : 'johnsmith@gmail.com'}',
+                          style: secondaryTextStyle(color: white, size: 16)),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.all(15.0),
+                            child: new LinearPercentIndicator(
+                              width: MediaQuery.of(context).size.width - 50,
+                              animation: true,
+                              lineHeight: 20.0,
+                              animationDuration: 2000,
+                              percent: 0.9,
+                              center: Text("90.0%"),
+                              barRadius: Radius.circular(10.0),
+                              progressColor: Colors.greenAccent,
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ),
@@ -57,7 +107,9 @@ class MLProfileFragmentState extends State<MLProfileFragment> {
               delegate: SliverChildBuilderDelegate(
                 (context, index) {
                   if (index == 0) {
-                    return MLProfileBottomComponent();
+                    if (currentUser != null) {
+                      return MLProfileBottomComponent(currentUser: currentUser);
+                    }
                   }
                   return null;
                 },

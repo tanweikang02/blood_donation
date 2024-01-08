@@ -4,6 +4,8 @@ import 'package:medilab_prokit/components/MLConfirmAppointmentComponent.dart';
 import 'package:medilab_prokit/components/MLDoctorListComponent.dart';
 import 'package:medilab_prokit/components/MLHospitalListComponent.dart';
 import 'package:medilab_prokit/components/MLPatientComponent.dart';
+import 'package:medilab_prokit/components/CalendarComponent.dart';
+import 'package:medilab_prokit/components/AddressFormComponent.dart';
 import 'package:medilab_prokit/model/BloodRequest.dart';
 import 'package:medilab_prokit/model/MLAppointmentData.dart';
 import 'package:medilab_prokit/model/MLBookAppointmentData.dart';
@@ -168,32 +170,23 @@ List<MLTopHospitalData> mlTopHospitalDataList() {
   return list;
 }
 
-List<MLBookAppointmentData> mlBookAppointmentDataList() {
+List<MLBookAppointmentData> mlBookAppointmentDataList(
+    callChildMethodController controller) {
   List<MLBookAppointmentData> list = [];
   list.add(MLBookAppointmentData(
       id: '1',
-      title: 'Select Service',
-      widget: MLClinicVisitComponent(),
-      progress: 0.2));
+      title: 'Select Date and Time',
+      widget: CalendarComponent(controller: controller),
+      progress: 0.33));
   list.add(MLBookAppointmentData(
       id: '2',
-      title: 'Choose Hospital',
-      widget: MLHospitalListComponent(),
-      progress: 0.4));
+      title: 'Choose Location',
+      widget: AddressFormComponent(controller: controller),
+      progress: 0.66));
   list.add(MLBookAppointmentData(
       id: '3',
-      title: 'Choose Doctor',
-      widget: MLDoctorListComponent(),
-      progress: 0.6));
-  list.add(MLBookAppointmentData(
-      id: '4',
-      title: 'Choose Patient',
-      widget: MLPatientComponent(),
-      progress: 0.8));
-  list.add(MLBookAppointmentData(
-      id: '5',
       title: 'Confirm Appointment',
-      widget: MLConfirmAppointmentComponent(),
+      widget: MLConfirmAppointmentComponent(controller: controller),
       progress: 1.0));
   return list;
 }
@@ -737,16 +730,24 @@ List<MLOrderTrackData> mlOrderTrackDataList() {
 List<MLProfileCardData> mlProfileDataList() {
   List<MLProfileCardData> list = [];
   list.add(MLProfileCardData(
-      img: ml_prescription1, name: 'Prescription', color: Colors.blueAccent));
+      img: ml_prescription1, name: 'Milestones', color: Colors.blueAccent));
   list.add(MLProfileCardData(
-      img: ml_prescription2,
-      name: 'Medical Record',
-      color: Colors.orangeAccent));
+      img: ml_prescription2, name: 'Badges', color: Colors.orangeAccent));
   list.add(MLProfileCardData(
       img: ml_prescription3, name: 'Medical Test', color: Colors.pinkAccent));
   list.add(MLProfileCardData(
       img: ml_prescription4, name: 'Health Tracking', color: Colors.cyan));
   return list;
+}
+
+List<String> badgeList() {
+  List<String> badges = [];
+
+  badges.add(badge_1);
+  badges.add(badge_2);
+  badges.add(badge_3);
+
+  return badges;
 }
 
 List<LanguageDataModel> languageList() {
