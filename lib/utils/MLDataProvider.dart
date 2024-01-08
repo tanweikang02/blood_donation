@@ -739,6 +739,16 @@ List<MLProfileCardData> mlProfileDataList() {
   return list;
 }
 
+List<String> badgeList() {
+  List<String> badges = [];
+
+  badges.add(badge_1);
+  badges.add(badge_2);
+  badges.add(badge_3);
+
+  return badges;
+}
+
 List<LanguageDataModel> languageList() {
   return [
     LanguageDataModel(
