@@ -3,6 +3,8 @@ import 'package:medilab_prokit/main.dart';
 import 'package:medilab_prokit/model/DonationRecord.dart';
 import 'package:medilab_prokit/model/MLProfileCardData.dart';
 import 'package:medilab_prokit/model/User.dart';
+import 'package:medilab_prokit/screens/MLBotScreen.dart';
+import 'package:medilab_prokit/screens/MilestoneScreen.dart';
 import 'package:medilab_prokit/utils/MLColors.dart';
 import 'package:medilab_prokit/utils/MLDataProvider.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -21,7 +23,28 @@ class MLProfileBottomComponent extends StatefulWidget {
 }
 
 class MLProfileBottomComponentState extends State<MLProfileBottomComponent> {
+
   FirebaseFirestore db = FirebaseFirestore.instance;
+
+  List<String> data = <String>[
+    'Membership card',
+    'Dependents',
+    'Health care',
+    'Refer friends and family'
+  ];
+  List<String> categoriesData = <String>[
+    'Milestones',
+    'Medical Record',
+    'Medical Test',
+    'Health Tracking'
+  ];
+  List<Color> customColor = <Color>[
+    Colors.blueAccent,
+    Colors.orangeAccent,
+    Colors.pinkAccent,
+    Colors.cyan
+  ];
+
   List<MLProfileCardData> mlProfileData = mlProfileDataList();
   List<String> badges = badgeList();
   List<DonationRecord> records = [];
@@ -212,10 +235,17 @@ class MLProfileBottomComponentState extends State<MLProfileBottomComponent> {
                       ),
                     ),
                   ],
-                );
-              },
-            ).toList(),
-          ).paddingTop(16),
+                ),
+              ).onTap(
+                () {
+                  MilestoneScreen().launch(context);
+                },
+              );
+            }).toList(),
+            mainAxisSpacing: 16.0,
+            crossAxisSpacing: 16.0,
+          ),
+
           16.height,
           Container(
             // margin: EdgeInsets.only(bottom: 16.0),
@@ -247,6 +277,33 @@ class MLProfileBottomComponentState extends State<MLProfileBottomComponent> {
             () {
               appStore.toggleDarkMode();
             },
+          ),
+
+          16.height,
+          Column(
+            children: data.map(
+              (e) {
+                return Container(
+                  margin: EdgeInsets.only(bottom: 16.0),
+                  padding: EdgeInsets.all(12.0),
+                  decoration: boxDecorationRoundedWithShadow(8,
+                      backgroundColor: context.cardColor),
+                  child: Row(
+                    children: [
+                      Icon(Icons.tab, size: 24, color: Colors.blue),
+                      8.width,
+                      Text(e.validate(), style: primaryTextStyle()).expand(),
+                      Icon(Icons.arrow_forward_ios,
+                          color: Colors.grey[300], size: 16),
+                    ],
+                  ),
+                ).onTap(
+                  () {
+                    toasty(context, e.validate());
+                  },
+                );
+              },
+            ).toList(),
           ),
         ],
       ),

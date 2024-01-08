@@ -729,11 +729,9 @@ List<MLOrderTrackData> mlOrderTrackDataList() {
 List<MLProfileCardData> mlProfileDataList() {
   List<MLProfileCardData> list = [];
   list.add(MLProfileCardData(
-      img: ml_prescription1, name: 'Prescription', color: Colors.blueAccent));
+      img: ml_prescription1, name: 'Milestones', color: Colors.blueAccent));
   list.add(MLProfileCardData(
-      img: ml_prescription2,
-      name: 'Medical Record',
-      color: Colors.orangeAccent));
+      img: ml_prescription2, name: 'Badges', color: Colors.orangeAccent));
   list.add(MLProfileCardData(
       img: ml_prescription3, name: 'Medical Test', color: Colors.pinkAccent));
   list.add(MLProfileCardData(
