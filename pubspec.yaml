@@ -35,6 +35,7 @@ dependencies:
   geocoding: ^2.1.1
   badges: ^3.1.2
   firebase_analytics: ^10.8.0
+  fluttermoji: ^1.0.2
 
 dependency_overrides:
   intl: ^0.18.1
