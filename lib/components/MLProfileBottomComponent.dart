@@ -3,10 +3,13 @@ import 'package:medilab_prokit/main.dart';
 import 'package:medilab_prokit/model/DonationRecord.dart';
 import 'package:medilab_prokit/model/MLProfileCardData.dart';
 import 'package:medilab_prokit/model/User.dart';
+import 'package:medilab_prokit/screens/LeaderboardScreen.dart';
 import 'package:medilab_prokit/screens/MLBotScreen.dart';
 import 'package:medilab_prokit/screens/MilestoneScreen.dart';
 import 'package:medilab_prokit/utils/MLColors.dart';
+import 'package:medilab_prokit/utils/MLCommon.dart';
 import 'package:medilab_prokit/utils/MLDataProvider.dart';
+import 'package:medilab_prokit/utils/MLImage.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:medilab_prokit/extensions/datetime.dart';
@@ -23,7 +26,6 @@ class MLProfileBottomComponent extends StatefulWidget {
 }
 
 class MLProfileBottomComponentState extends State<MLProfileBottomComponent> {
-
   FirebaseFirestore db = FirebaseFirestore.instance;
 
   List<String> data = <String>[
@@ -90,7 +92,6 @@ class MLProfileBottomComponentState extends State<MLProfileBottomComponent> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: context.height() * 0.8,
       padding: EdgeInsets.all(16.0),
       decoration: boxDecorationWithRoundedCorners(
         borderRadius: radiusOnly(topRight: 32),
@@ -123,130 +124,159 @@ class MLProfileBottomComponentState extends State<MLProfileBottomComponent> {
               8.width,
             ],
           ),
+          32.height,
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text('Recent Donations', style: boldTextStyle(size: 18)),
             ],
           ),
+          16.height,
           Column(
-            children: records.map(
-              (e) {
-                return Stack(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(top: 8.0),
-                      decoration: boxDecorationWithRoundedCorners(
-                        backgroundColor: appStore.isDarkModeOn
-                            ? scaffoldDarkColor
-                            : Colors.grey.shade50,
-                        borderRadius: radius(12),
-                      ),
-                      child: Column(
-                        children: [
-                          20.height,
-                          Row(
-                            children: [
-                              Container(
-                                height: 75,
-                                width: 75,
-                                decoration: boxDecorationWithRoundedCorners(
-                                  backgroundColor: mlPrimaryColor,
-                                  borderRadius: radius(12),
-                                ),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                        (e.donationDateTime?.day.toString())
-                                            .validate(),
-                                        style: boldTextStyle(
-                                            size: 32, color: white)),
-                                    Text(
-                                        "${e.donationDateTime?.month.toMonthName(isHalfName: true)} ${e.donationDateTime?.year}"
-                                            .validate(),
-                                        style:
-                                            secondaryTextStyle(color: white)),
-                                  ],
-                                ),
+            children: records.map((e) {
+              return Stack(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(top: 8.0),
+                    decoration: boxDecorationWithRoundedCorners(
+                      backgroundColor: appStore.isDarkModeOn
+                          ? scaffoldDarkColor
+                          : Colors.grey.shade50,
+                      borderRadius: radius(12),
+                    ),
+                    child: Column(
+                      children: [
+                        20.height,
+                        Row(
+                          children: [
+                            Container(
+                              height: 75,
+                              width: 75,
+                              decoration: boxDecorationWithRoundedCorners(
+                                backgroundColor: mlPrimaryColor,
+                                borderRadius: radius(12),
                               ),
-                              8.width,
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text((e.location).validate(),
-                                          softWrap: true,
-                                          style: boldTextStyle(size: 18)),
-                                      8.height,
-                                      Text((e.donorName).validate(),
-                                          style: secondaryTextStyle()),
-                                      8.height,
-                                      Text(
-                                          (e.donationDateTime
-                                                  ?.toReadableFormat())
-                                              .validate(),
-                                          style: secondaryTextStyle()),
-                                    ],
-                                  ).expand(),
-                                ],
-                              ).expand(),
-                            ],
-                          ).paddingOnly(right: 16.0, left: 16.0),
-                          8.height,
-                          Divider(thickness: 0.5),
-                          8.height,
-                          Row(
-                            children: [
-                              Text(
-                                  "${e.bloodVolume_Milliliter.toString()} ml"
-                                      .validate(),
-                                  style: boldTextStyle(color: mlPrimaryColor)),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                      "Payment: RM ${e.paymentAmount!.toStringAsFixed(2)}",
-                                      style: secondaryTextStyle(
-                                          color: mlPrimaryColor)),
+                                      (e.donationDateTime?.day.toString())
+                                          .validate(),
+                                      style: boldTextStyle(
+                                          size: 32, color: white)),
+                                  Text(
+                                      "${e.donationDateTime?.month.toMonthName(isHalfName: true)} ${e.donationDateTime?.year}"
+                                          .validate(),
+                                      style: secondaryTextStyle(color: white)),
                                 ],
-                              ).expand()
-                            ],
-                          ).paddingOnly(right: 16.0, left: 16.0),
-                          16.height,
-                        ],
-                      ),
-                    ).paddingBottom(16.0),
-                    Positioned(
-                      left: 16.0,
-                      child: Container(
-                        padding: EdgeInsets.all(2.0),
-                        decoration: boxDecorationWithRoundedCorners(
-                            backgroundColor: mlPrimaryColor,
-                            borderRadius: radius(20)),
-                        child: Text(
-                          (e.isVoluntary == true ? "Voluntary" : "Paid"),
-                          style: secondaryTextStyle(color: white),
-                        ).paddingOnly(right: 10.0, left: 10.0),
-                      ),
+                              ),
+                            ),
+                            8.width,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text((e.location).validate(),
+                                        softWrap: true,
+                                        style: boldTextStyle(size: 18)),
+                                    8.height,
+                                    Text((e.donorName).validate(),
+                                        style: secondaryTextStyle()),
+                                    8.height,
+                                    Text(
+                                        (e.donationDateTime?.toReadableFormat())
+                                            .validate(),
+                                        style: secondaryTextStyle()),
+                                  ],
+                                ).expand(),
+                              ],
+                            ).expand(),
+                          ],
+                        ).paddingOnly(right: 16.0, left: 16.0),
+                        8.height,
+                        Divider(thickness: 0.5),
+                        8.height,
+                        Row(
+                          children: [
+                            Text(
+                                "${e.bloodVolume_Milliliter.toString()} ml"
+                                    .validate(),
+                                style: boldTextStyle(color: mlPrimaryColor)),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Text(
+                                    "Payment: RM ${e.paymentAmount!.toStringAsFixed(2)}",
+                                    style: secondaryTextStyle(
+                                        color: mlPrimaryColor)),
+                              ],
+                            ).expand()
+                          ],
+                        ).paddingOnly(right: 16.0, left: 16.0),
+                        16.height,
+                      ],
                     ),
-                  ],
-                ),
+                  ).paddingBottom(16.0),
+                  Positioned(
+                    left: 16.0,
+                    child: Container(
+                      padding: EdgeInsets.all(2.0),
+                      decoration: boxDecorationWithRoundedCorners(
+                          backgroundColor: mlPrimaryColor,
+                          borderRadius: radius(20)),
+                      child: Text(
+                        (e.isVoluntary == true ? "Voluntary" : "Paid"),
+                        style: secondaryTextStyle(color: white),
+                      ).paddingOnly(right: 10.0, left: 10.0),
+                    ),
+                  ),
+                ],
               ).onTap(
                 () {
                   MilestoneScreen().launch(context);
                 },
               );
             }).toList(),
-            mainAxisSpacing: 16.0,
-            crossAxisSpacing: 16.0,
+            // mainAxisSpacing: 16.0,
+            // crossAxisSpacing: 16.0,
           ),
 
+          //  leaderboard
           16.height,
+          Stack(alignment: Alignment.centerLeft, children: [
+            commonCachedNetworkImage(
+              leaderboard_card.validate(),
+              fit: BoxFit.cover,
+            ).cornerRadiusWithClipRRect(12.0),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('1 Blood = 3 Lives',
+                    style: primaryTextStyle(size: 20, weight: FontWeight.w900)),
+                Text('Your friends are donating blood to save lives!',
+                    style: secondaryTextStyle(size: 16))
+              ],
+            ).paddingAll(16)
+          ]),
+
+          8.height,
+          GestureDetector(
+            onTap: () => LeaderboardScreen().launch(context),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text("See how your friends are doing",
+                    style: secondaryTextStyle(color: mlColorBlue)),
+                8.width,
+                Icon(Icons.keyboard_arrow_right, color: mlColorBlue, size: 16),
+              ],
+            ),
+          ),
+
+          32.height,
           Container(
             // margin: EdgeInsets.only(bottom: 16.0),
             padding: EdgeInsets.all(8.0),

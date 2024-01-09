@@ -5,6 +5,7 @@ class DonationEvent {
   String? name;
   String? description;
   String? host;
+  String? imageUrl;
   String? locationName;
   String? city;
   LatLng? latlng;
@@ -15,6 +16,7 @@ class DonationEvent {
       {this.name,
       this.description,
       this.host,
+      this.imageUrl,
       this.locationName,
       this.latlng,
       this.startDateTime,
@@ -25,6 +27,7 @@ class DonationEvent {
       : name = map["name"],
         description = map["description"],
         host = map["host"],
+        imageUrl = map["imageUrl"],
         locationName = map["locationName"],
         city = map["city"],
         latlng = LatLng(map["latlng"].latitude, map["latlng"].longitude),

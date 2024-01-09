@@ -64,32 +64,32 @@ List<MLServicesData> mlServiceDataList() {
   list.add(MLServicesData(
       title: 'Donation Spots',
       icon: Icons.home_work_outlined,
-      image: ml_ic_dashClinicVisit!,
+      image: donation_spot!,
       widget: MapScreen()));
   list.add(MLServicesData(
       title: 'Blood Requests',
       icon: Icons.home_work_outlined,
-      image: ml_ic_dashDisease!,
+      image: blood_requests!,
       widget: ListBloodRequestScreen()));
   list.add(MLServicesData(
       title: 'Donation History',
       icon: Icons.local_hospital,
-      image: ml_ic_dashPharmacy,
+      image: donation_history,
       widget: DonationHistoryListScreen()));
   list.add(MLServicesData(
       title: 'Home Visit',
       icon: Icons.home,
-      image: ml_ic_dashHomeVisit,
+      image: home_visit,
       widget: MLBookAppointmentScreen(index: 0)));
   list.add(MLServicesData(
       title: 'Video Consult',
       icon: Icons.video_call,
-      image: ml_ic_dashVideoCons,
+      image: video_consult,
       widget: MLVideoConsultScreen()));
   list.add(MLServicesData(
       title: 'Statistics',
       icon: Icons.local_hospital,
-      image: ml_ic_dashPharmacy,
+      image: statistics,
       widget: StatisticScreen()));
   // list.add(MLServicesData(title: 'Diseases', icon: Icons.health_and_safety, image: ml_ic_dashDisease, widget: MLDiseaseScreen()));
   // list.add(MLServicesData(title: 'Covid-19', icon: Icons.supervised_user_circle_outlined, image: ml_ic_dashCovid, widget: MLCovidScreen()));

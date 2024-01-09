@@ -91,7 +91,7 @@ class MLProfileFragmentState extends State<MLProfileFragment> {
                               lineHeight: 20.0,
                               animationDuration: 2000,
                               percent: 0.9,
-                              center: Text("90.0%"),
+                              center: Text("90.0%", style: TextStyle(color: black),),
                               barRadius: Radius.circular(10.0),
                               progressColor: Colors.greenAccent,
                             ),
