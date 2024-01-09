@@ -35,6 +35,7 @@ import 'package:medilab_prokit/screens/MLCovid19Screen.dart';
 import 'package:medilab_prokit/screens/MLDiseaseScreen.dart';
 import 'package:medilab_prokit/screens/MLOnlinePharmacyScreen.dart';
 import 'package:medilab_prokit/screens/MLVideoCounsultScreen.dart';
+import 'package:medilab_prokit/screens/BloodJourneyScreen.dart';
 import 'package:medilab_prokit/screens/MapScreen.dart';
 import 'package:medilab_prokit/screens/StatisticScreen.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -85,7 +86,7 @@ List<MLServicesData> mlServiceDataList() {
       title: 'Video Consult',
       icon: Icons.video_call,
       image: ml_ic_dashVideoCons,
-      widget: MLVideoConsultScreen()));
+      widget: BloodJourneyScreen()));
   list.add(MLServicesData(
       title: 'Statistics',
       icon: Icons.local_hospital,
