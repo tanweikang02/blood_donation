@@ -44,7 +44,7 @@ class DonationEventComponent extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             commonCachedNetworkImage(
-              blood_donation_event.validate(),
+              e.imageUrl.validate(),
               width: double.infinity,
               height: 150.0,
               fit: BoxFit.cover,

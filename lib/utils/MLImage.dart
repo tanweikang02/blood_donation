@@ -100,6 +100,14 @@ const String? blood_donation_event = "images/blood_donation_event.jpg";
 const String? leaderboard_card = "images/leaderboard-bg.jpg";
 const String? anonymous_avatar = "images/anonymous_avatar.jpg";
 
+// Home Page Icons
+const String? donation_spot = "images/location map.png";
+const String? donation_history = "images/document.png";
+const String? home_visit = "images/house 2.png";
+const String? statistics = "images/bar chart.png";
+const String? blood_requests = "images/blood transfusion.png";
+const String? video_consult = "images/video camera.png";
+
 // Badges
 const String badge_1 = "images/bloodBadge.png";
 const String badge_2 = "images/firstBloodDonation.png";

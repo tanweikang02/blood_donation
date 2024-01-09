@@ -129,24 +129,19 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                                     badgeStyle: badges.BadgeStyle(
                                       badgeColor: Colors.amber
                                     ),
-                                    child: Container(
-                                      height: 48,
-                                      width: 48,
-                                      decoration:
-                                          boxDecorationWithRoundedCorners(
-                                        backgroundColor: mlPrimaryColor,
-                                        borderRadius: radius(18),
-                                      ),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          commonCachedNetworkImage(
-                                            anonymous_avatar.validate(),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        SizedBox(
+                                          width: 52,
+                                          height: 52,
+                                          child: commonCachedNetworkImage(
+                                            user.profileImageUrl.validate(),
                                             fit: BoxFit.cover,
-                                          )
-                                        ],
-                                      ),
+                                          ).cornerRadiusWithClipRRect(88),
+                                        )
+                                      ],
                                     ),
                                   ),
                                   16.width,

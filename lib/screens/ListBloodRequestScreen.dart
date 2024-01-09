@@ -191,26 +191,26 @@ class _ListBloodRequestScreenState extends State<ListBloodRequestScreen> {
                                       ],
                                     ).paddingSymmetric(vertical: 5, horizontal: 16)
                                   ),
-                                  RichText(
-                                    text: TextSpan(
-                                      children: [
-                                        TextSpan(
-                                            text: 'Details',
-                                            style: primaryTextStyle(
-                                                color: mlPrimaryColor)),
-                                        WidgetSpan(
-                                          child: Icon(Icons.arrow_forward,
-                                                  color: mlPrimaryColor,
-                                                  size: 16)
-                                              .paddingLeft(4),
-                                        ),
-                                      ],
-                                    ),
-                                  ).onTap(
-                                    () {
-                                      MLDoctorDetailScreen().launch(context);
-                                    },
-                                  )
+                                  // RichText(
+                                  //   text: TextSpan(
+                                  //     children: [
+                                  //       TextSpan(
+                                  //           text: 'Details',
+                                  //           style: primaryTextStyle(
+                                  //               color: mlPrimaryColor)),
+                                  //       WidgetSpan(
+                                  //         child: Icon(Icons.arrow_forward,
+                                  //                 color: mlPrimaryColor,
+                                  //                 size: 16)
+                                  //             .paddingLeft(4),
+                                  //       ),
+                                  //     ],
+                                  //   ),
+                                  // ).onTap(
+                                  //   () {
+                                  //     MLDoctorDetailScreen().launch(context);
+                                  //   },
+                                  // )
                                 ],
                               ),
                             ],

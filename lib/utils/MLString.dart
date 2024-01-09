@@ -36,7 +36,7 @@ const String? mlDate_format = 'DD/MM/YY';
 const String? mlRegister = 'Register';
 
 const String? mlWelcome = 'Welcome back!';
-const String? mlProfile_name = 'Hi Kaixa,';
+const String? mlProfile_name = 'Hi Casey,';
 const String? mlDepartment = 'Departments';
 const String? mlView_all = 'View all';
 const String? mlTop_hospital = 'Top Hospital';
