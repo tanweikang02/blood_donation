@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medilab_prokit/screens/BloodJourneyTestScreen.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class BloodJourneyScreen extends StatelessWidget {
@@ -17,7 +18,6 @@ class BloodJourneyScreen extends StatelessWidget {
               ),
               Padding(
                   padding: const EdgeInsets.all(8.0),
-                  // child: JourneyOverview(),
                   child: Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
@@ -110,7 +110,9 @@ class JourneyStep extends StatelessWidget {
                             padding: EdgeInsets.zero,
                             textStyle: TextStyle(fontSize: 12)),
                         child: Text('View Details'),
-                        onPressed: () {})
+                        onPressed: () {
+                          BloodJourneyTestScreen().launch(context);
+                        })
                   ]),
             ),
             Container(

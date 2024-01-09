@@ -29,7 +29,7 @@ class MLProfileBottomComponentState extends State<MLProfileBottomComponent> {
   FirebaseFirestore db = FirebaseFirestore.instance;
 
   List<String> data = <String>[
-    'Membership card',
+    'Milestone',
     'Dependents',
     'Health care',
     'Refer friends and family'
@@ -329,7 +329,7 @@ class MLProfileBottomComponentState extends State<MLProfileBottomComponent> {
                   ),
                 ).onTap(
                   () {
-                    toasty(context, e.validate());
+                    MilestoneScreen().launch(context);
                   },
                 );
               },
