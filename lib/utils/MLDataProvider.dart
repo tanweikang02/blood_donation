@@ -30,6 +30,7 @@ import 'package:medilab_prokit/model/MLVoucherData.dart';
 import 'package:medilab_prokit/model/MLWalkThroughData.dart';
 import 'package:medilab_prokit/screens/DonationHistoryListScreen.dart';
 import 'package:medilab_prokit/screens/ListBloodRequestScreen.dart';
+import 'package:medilab_prokit/screens/ListEducationContentScreen.dart';
 import 'package:medilab_prokit/screens/MLBookAppointmentScreen.dart';
 import 'package:medilab_prokit/screens/MLCovid19Screen.dart';
 import 'package:medilab_prokit/screens/MLDiseaseScreen.dart';
@@ -83,10 +84,10 @@ List<MLServicesData> mlServiceDataList() {
       image: home_visit,
       widget: MLBookAppointmentScreen(index: 0)));
   list.add(MLServicesData(
-      title: 'Video Consult',
+      title: 'Youngblood Guide',
       icon: Icons.video_call,
-      image: video_consult,
-      widget: MLVideoConsultScreen()));
+      image: youngblood_guide,
+      widget: ListEducationContentScreen()));
   list.add(MLServicesData(
       title: 'Statistics',
       icon: Icons.local_hospital,
