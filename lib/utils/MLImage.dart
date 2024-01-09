@@ -106,7 +106,11 @@ const String? donation_history = "images/document.png";
 const String? home_visit = "images/house 2.png";
 const String? statistics = "images/bar chart.png";
 const String? blood_requests = "images/blood transfusion.png";
-const String? video_consult = "images/video camera.png";
+const String? youngblood_guide = "images/youngblood-guide.png";
+
+// Education posts
+const String? edu_1 = "images/edu-1.jpg";
+const String? edu_3 = "images/edu-3.jpg";
 
 // Badges
 const String badge_1 = "images/bloodBadge.png";

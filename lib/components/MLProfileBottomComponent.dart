@@ -103,6 +103,18 @@ class MLProfileBottomComponentState extends State<MLProfileBottomComponent> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text('Badges', style: boldTextStyle(size: 18)),
+              GestureDetector(
+            onTap: () => MilestoneScreen().launch(context),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text("Milestones",
+                    style: secondaryTextStyle(color: mlColorBlue)),
+                8.width,
+                Icon(Icons.keyboard_arrow_right, color: mlColorBlue, size: 16),
+              ],
+            ),
+          )
             ],
           ),
           16.height,

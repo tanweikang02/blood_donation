@@ -71,35 +71,11 @@ class _MLHomeTopComponentState extends State<MLHomeTopComponent> {
                   ),
                 ],
               ),
-              Row(
-                children: [
-                  Icon(Icons.search, color: white, size: 24),
-                  10.width,
-                  Stack(
-                    children: [
-                      Icon(Icons.shopping_bag_outlined, color: white, size: 24),
-                      Positioned(
-                        top: 0.0,
-                        right: 0.0,
-                        child: Container(
-                          padding: EdgeInsets.all(2),
-                          decoration: boxDecorationWithRoundedCorners(
-                              backgroundColor: mlColorRed),
-                          constraints:
-                              BoxConstraints(minWidth: 12, minHeight: 12),
-                          child: Text(
-                            counter.toString(),
-                            style: boldTextStyle(size: 8, color: white),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ).onTap(() {
-                    MLAddToCartScreen().launch(context);
-                  }),
-                ],
-              )
+              // Row(
+              //   children: [
+              //     Icon(Icons.person, color: white, size: 24).onTap(() => ),
+              //   ],
+              // )
             ],
           ).paddingOnly(right: 16.0, left: 16.0),
           Container(
