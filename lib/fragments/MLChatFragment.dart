@@ -13,7 +13,8 @@ class MLChatFragment extends StatefulWidget {
   MLChatFragmentState createState() => MLChatFragmentState();
 }
 
-class MLChatFragmentState extends State<MLChatFragment> with SingleTickerProviderStateMixin {
+class MLChatFragmentState extends State<MLChatFragment>
+    with SingleTickerProviderStateMixin {
   int notificationCounter = 3;
   TextEditingController _searchController = TextEditingController();
   late TabController _tabController;
@@ -24,7 +25,7 @@ class MLChatFragmentState extends State<MLChatFragment> with SingleTickerProvide
     _searchController.addListener(() {
       setState(() {});
     });
-    _tabController = TabController(length: 2, vsync: this);
+    _tabController = TabController(length: 1, vsync: this);
     init();
   }
 
@@ -69,7 +70,9 @@ class MLChatFragmentState extends State<MLChatFragment> with SingleTickerProvide
                 autoFocus: false,
                 decoration: InputDecoration(
                   hintText: "Search",
-                  prefixIcon: Icon(Icons.search, color: appStore.isDarkModeOn ? white : blackColor, size: 20),
+                  prefixIcon: Icon(Icons.search,
+                      color: appStore.isDarkModeOn ? white : blackColor,
+                      size: 20),
                   suffixIcon: _searchController.text.isEmpty
                       ? null
                       : Icon(Icons.clear).onTap(() {
@@ -85,14 +88,14 @@ class MLChatFragmentState extends State<MLChatFragment> with SingleTickerProvide
                 indicatorSize: TabBarIndicatorSize.label,
                 unselectedLabelColor: Colors.grey,
                 tabs: [
-                  Tab(text: mlDoctors! + ' (' + notificationCounter.toString() + ')'),
+                  // Tab(text: mlDoctors! + ' (' + notificationCounter.toString() + ')'),
                   Tab(text: mlBot_support),
                 ],
               ),
               TabBarView(
                 controller: _tabController,
                 children: [
-                  MLDoctorChatComponent(),
+                  // MLDoctorChatComponent(),
                   MLBotSupportComponent(),
                 ],
               ).expand(),

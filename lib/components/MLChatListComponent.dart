@@ -38,41 +38,12 @@ class MLChatListComponentState extends State<MLChatListComponent> {
       children: widget.data.map(
         (e) {
           return Container(
-            margin: EdgeInsets.symmetric(vertical: 8),
+            margin: EdgeInsets.symmetric(vertical: 15),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Stack(
-                  children: [
-                    CircleAvatar(
-                      backgroundColor: widget.color,
-                      radius: 28.0,
-                      child: Image.asset(
-                        ml_ic_doctor_image!,
-                        fit: BoxFit.cover,
-                        width: 56,
-                        height: 56,
-                      ).cornerRadiusWithClipRRect(30.0),
-                    ),
-                    Positioned(
-                      bottom: 8.0,
-                      right: 2.0,
-                      child: e == widget.data[0]
-                          ? Container(
-                              width: 8.0,
-                              height: 8.0,
-                              decoration: boxDecorationWithRoundedCorners(
-                                boxShape: BoxShape.circle,
-                                backgroundColor: Colors.greenAccent,
-                              ),
-                            )
-                          : Container(),
-                    ),
-                  ],
-                ),
-                8.width,
                 Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     4.height,
@@ -83,29 +54,14 @@ class MLChatListComponentState extends State<MLChatListComponent> {
                           overflow: TextOverflow.ellipsis,
                           text: TextSpan(
                             children: <TextSpan>[
-                              TextSpan(text: e.validate(), style: boldTextStyle()),
-                              TextSpan(text: '(Clinic Visit)', style: secondaryTextStyle(size: 16)),
+                              TextSpan(
+                                  text: e.validate(), style: boldTextStyle()),
                             ],
                           ),
                         ),
-                        Text('9.56 AM', style: boldTextStyle()),
+                        Text('01/01/24', style: boldTextStyle()),
                       ],
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("What are you doing?", style: secondaryTextStyle()),
-                        Container(
-                          padding: EdgeInsets.all(6),
-                          alignment: Alignment.center,
-                          decoration: boxDecorationWithRoundedCorners(
-                            backgroundColor: mlColorBlue,
-                            boxShape: BoxShape.circle,
-                          ),
-                          child: Text(notificationCounter.toString(), style: secondaryTextStyle(color: whiteColor)),
-                        ),
-                      ],
-                    )
                   ],
                 ).expand(),
               ],
