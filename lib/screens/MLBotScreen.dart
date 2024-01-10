@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cloud_functions/cloud_functions.dart';
+import 'package:fluttermoji/fluttermoji.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
@@ -98,31 +99,20 @@ class MLBotScreenState extends State<MLBotScreen> {
                         Stack(
                           children: [
                             CircleAvatar(
-                              backgroundColor: Colors.yellow,
-                              radius: 28.0,
-                              child: Image.asset(ml_ic_doctor_image!,
-                                      fit: BoxFit.cover)
-                                  .cornerRadiusWithClipRRect(30.0),
-                            ),
-                            Positioned(
-                              right: 0,
-                              bottom: 6,
-                              child: Icon(Icons.brightness_1_rounded,
-                                  color: Colors.greenAccent, size: 14),
-                            )
+                                backgroundColor: Colors.transparent,
+                                radius: 28.0,
+                                child: Image.asset('images/palm.png',
+                                    fit: BoxFit.cover)),
                           ],
                         ),
                         8.width,
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Tony Bot (General Care)',
+                            Text('Google PaLM',
                                 style:
                                     boldTextStyle(color: whiteColor, size: 18)),
                             4.height,
-                            Text('Online',
-                                style: secondaryTextStyle(
-                                    size: 16, color: white.withOpacity(0.5))),
                           ],
                         )
                       ],
@@ -177,12 +167,13 @@ class MLBotScreenState extends State<MLBotScreen> {
                                               ),
                                               8.width,
                                               CircleAvatar(
-                                                backgroundColor: mlColorCyan,
-                                                child: Image.asset(
-                                                        ml_ic_profile_picture!,
-                                                        fit: BoxFit.fill)
-                                                    .cornerRadiusWithClipRRect(
-                                                        30.0),
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                // backgroundColor: mlColorCyan,
+                                                child: FluttermojiCircleAvatar(
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                ),
                                               ),
                                             ],
                                           ),
@@ -199,13 +190,12 @@ class MLBotScreenState extends State<MLBotScreen> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               CircleAvatar(
-                                                backgroundColor: Colors.yellow,
-                                                child: Image.asset(
-                                                  ml_ic_doctor_image!,
-                                                  fit: BoxFit.fill,
-                                                ).cornerRadiusWithClipRRect(
-                                                    30.0),
-                                              ),
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  radius: 20.0,
+                                                  child: Image.asset(
+                                                      'images/palm.png',
+                                                      fit: BoxFit.cover)),
                                               8.width,
                                               Container(
                                                 decoration:
