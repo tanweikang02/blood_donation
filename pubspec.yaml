@@ -38,6 +38,7 @@ dependencies:
   firebase_analytics: ^10.8.0
   fluttermoji: ^1.0.2
   flutter_local_notifications: ^16.3.0
+  flutter_config: ^2.0.2
 
 dependency_overrides:
   intl: ^0.18.1
