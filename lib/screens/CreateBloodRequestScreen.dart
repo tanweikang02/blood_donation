@@ -1,5 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
 import 'package:flutter/material.dart';
 import 'package:medilab_prokit/main.dart';
 import 'package:medilab_prokit/utils/MLColors.dart';
@@ -50,7 +53,8 @@ class _CreateBloodRequestScreenState extends State<CreateBloodRequestScreen> {
     }).then((documentSnapshot) async {
       print("Added Data with ID: ${documentSnapshot.id}");
 
-      FirebaseFunctions functions = FirebaseFunctions.instanceFor(region: "us-central1");
+      FirebaseFunctions functions =
+          FirebaseFunctions.instanceFor(region: "us-central1");
       functions.useFunctionsEmulator("localhost", 5001);
       HttpsCallable callable = functions.httpsCallable("sendNotifications");
       final result = await callable(<String, dynamic>{
@@ -60,9 +64,92 @@ class _CreateBloodRequestScreenState extends State<CreateBloodRequestScreen> {
       bool success = result.data;
 
       if (success) {
-        showConfirmDialog(context, "We have alerted people about your request!");
+        showConfirmDialog(
+            context, "We have alerted people about your request!");
       }
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    messageHandler();
+  }
+
+  Future<void> messageHandler() async {
+    await FirebaseMessaging.instance.setAutoInitEnabled(true);
+
+    // print("Sent notifications successfully");
+    FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+    // NotificationSettings settings =
+    await FirebaseMessaging.instance.requestPermission(
+      alert: true,
+      announcement: true,
+      badge: true,
+      carPlay: false,
+      criticalAlert: false,
+      provisional: false,
+      sound: true,
+    );
+
+    FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+      alert: true, // Required to display a heads up notification
+      badge: true,
+      sound: true,
+    );
+
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      showNotification(message.notification!.title, message.notification!.body);
+
+      print('Got a message whilst in the foreground!');
+      print('Message data: ${message.data}');
+
+      if (message.notification != null) {
+        // showNotification(
+        //     message.notification!.title, message.notification!.body);
+        print('Message also contained a notification: ${message.notification}');
+      }
+    });
+  }
+
+  Future onSelectNotification(String payload) async {
+    showDialog(
+      context: context,
+      builder: (_) {
+        return new AlertDialog(
+          title: Text("PayLoad"),
+          content: Text("Payload : $payload"),
+        );
+      },
+    );
+  }
+
+  void showNotification(String? title, String? body) async {
+    await _demoNotification(title, body);
+  }
+
+  Future<void> _demoNotification(String? title, String? body) async {
+    var android = AndroidInitializationSettings("@mipmap/ic_launcher");
+    var initialSetting = new InitializationSettings(android: android);
+    final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+        FlutterLocalNotificationsPlugin();
+    flutterLocalNotificationsPlugin.initialize(initialSetting);
+    const AndroidNotificationDetails androidDetails =
+        AndroidNotificationDetails(
+      'default_notification_channel_id', 'Notification',
+      importance: Importance.max,
+      priority: Priority.high,
+      ticker: 'ticker',
+      icon: "@mipmap/ic_launcher",
+      // icon: "images/blood_transfusion.png",
+      playSound: true,
+      // sound: RawResourceAndroidNotificationSound("notification")
+    );
+    const NotificationDetails platformChannelSpecifics =
+        NotificationDetails(android: androidDetails);
+
+    await flutterLocalNotificationsPlugin.show(
+        0, title, body, platformChannelSpecifics);
   }
 
   @override

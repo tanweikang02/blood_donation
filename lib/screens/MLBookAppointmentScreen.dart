@@ -32,7 +32,7 @@ class MLBookAppointmentScreenState extends State<MLBookAppointmentScreen> {
 
   String name =
       "Chai Waii Yuan"; // NOTE: NEED TO DO FIREBASE AUTH, TEMPORARY SOLUTION
-  int minimumRequirement = 5; // Set the minimum requirement for home visit
+  int minimumRequirement = 0; // Set the minimum requirement for home visit
 
   MLBookAppointmentScreenState() {
     data = mlBookAppointmentDataList(controller);
